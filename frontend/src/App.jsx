@@ -12,6 +12,7 @@ import {
   FaGraduationCap,
   FaLinkedin,
   FaLocationDot,
+  FaPhone,
   FaMoon,
   FaRegStar,
   FaSun,
@@ -334,9 +335,19 @@ export default function App() {
             <div className="glass-card h-100">
               <p className="mb-4">{profile.summary}</p>
               <div className="row g-3 meta-grid">
-                <div className="col-sm-4"><strong><FaLocationDot /> Location</strong><br />{profile.location}</div>
-                <div className="col-sm-4"><strong><FaEnvelope /> Email</strong><br />{profile.email}</div>
-                <div className="col-sm-4"><strong><FaGithub /> GitHub</strong><br />{profile.githubUsername}</div>
+                <div className="col-sm-6 col-lg-3"><strong><FaLocationDot /> Location</strong><br />{profile.location}</div>
+                <div className="col-sm-6 col-lg-3">
+                  <strong><FaEnvelope /> Email</strong><br />
+                  <a className="contact-link" href={`mailto:${profile.email}`}>{profile.email}</a>
+                </div>
+                <div className="col-sm-6 col-lg-3">
+                  <strong><FaPhone /> Mobile</strong><br />
+                  <a className="contact-link" href={`tel:${profile.phone.replace(/\s+/g, "")}`}>{profile.phone}</a>
+                </div>
+                <div className="col-sm-6 col-lg-3">
+                  <strong><FaGithub /> GitHub</strong><br />
+                  <a className="contact-link" href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer">{profile.githubUsername}</a>
+                </div>
               </div>
             </div>
           </div>

@@ -255,14 +255,50 @@ a:hover { text-decoration: underline; }
 }
 
 .glass-card {
+  position: relative;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 1rem;
   background: var(--card);
   padding: 1.05rem;
   box-shadow: 0 14px 34px rgba(2, 8, 28, 0.16);
+  transition: transform 0.35s ease, border-color 0.35s ease;
+}
+
+.glass-card::after {
+  content: "";
+  position: absolute;
+  top: -120%;
+  left: -35%;
+  width: 40%;
+  height: 260%;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  transform: rotate(20deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklab, var(--brand-2) 38%, var(--line));
+}
+
+.glass-card:hover::after {
+  left: 120%;
 }
 
 .meta-grid strong { color: var(--text); }
+.contact-link {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px dashed color-mix(in oklab, var(--brand-2) 55%, transparent);
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.contact-link:hover {
+  color: var(--brand-2);
+  border-color: color-mix(in oklab, var(--brand-2) 90%, transparent);
+}
 
 .timeline-wrap { position: relative; display: grid; gap: 1rem; }
 .timeline-wrap::before {
@@ -300,15 +336,35 @@ a:hover { text-decoration: underline; }
 
 .project-card,
 .github-card {
+  position: relative;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 1rem;
   background: linear-gradient(150deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--bg-soft) 92%, var(--brand-2) 8%));
   padding: 1rem;
-  transition: transform 0.32s ease, border-color 0.32s ease;
+  transition: transform 0.32s ease, border-color 0.32s ease, box-shadow 0.32s ease;
+}
+
+.project-card::before,
+.github-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(56, 189, 248, 0.18), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .project-card:hover,
-.github-card:hover { transform: translateY(-4px); border-color: color-mix(in oklab, var(--brand) 36%, var(--line)); }
+.github-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in oklab, var(--brand) 36%, var(--line));
+  box-shadow: 0 14px 28px rgba(12, 36, 88, 0.2);
+}
+
+.project-card:hover::before,
+.github-card:hover::before { opacity: 1; }
 
 .project-impact {
   display: inline-flex;
