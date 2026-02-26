@@ -73,3 +73,24 @@ test("github projects section loads", async ({ page }) => {
   await expect(repoCards.first()).toBeVisible({ timeout: 30_000 });
   expect(await repoCards.count()).toBeGreaterThan(0);
 });
+
+test("about meta items do not overlap", async ({ page }) => {
+  await page.goto("/");
+  await page.locator("#about").scrollIntoViewIfNeeded();
+
+  const overlap = await page.evaluate(() => {
+    const items = Array.from(document.querySelectorAll("#about .meta-grid > div"));
+    const rects = items.map((el) => el.getBoundingClientRect());
+    for (let i = 0; i < rects.length; i += 1) {
+      for (let j = i + 1; j < rects.length; j += 1) {
+        const a = rects[i];
+        const b = rects[j];
+        const intersects = !(a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom);
+        if (intersects) return true;
+      }
+    }
+    return false;
+  });
+
+  expect(overlap).toBeFalsy();
+});

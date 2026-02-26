@@ -373,18 +373,18 @@ export default function App() {
         <div className="row g-4 align-items-stretch">
           <div className="col-lg-8">
             <div className="glass-card h-100">
-              <p className="mb-4">{profile.summary}</p>
+              <p className="mb-4 about-summary">{profile.summary}</p>
               <div className="row g-3 meta-grid">
-                <div className="col-sm-6 col-lg-3"><strong><FaLocationDot /> Location</strong><br />{profile.location}</div>
-                <div className="col-sm-6 col-lg-3">
+                <div className="col-md-6 col-xl-3"><strong><FaLocationDot /> Location</strong><br />{profile.location}</div>
+                <div className="col-md-6 col-xl-3">
                   <strong><FaEnvelope /> Email</strong><br />
                   <a className="contact-link" href={`mailto:${profile.email}`}>{profile.email}</a>
                 </div>
-                <div className="col-sm-6 col-lg-3">
+                <div className="col-md-6 col-xl-3">
                   <strong><FaPhone /> Mobile</strong><br />
                   <a className="contact-link" href={`tel:${profile.phone.replace(/\s+/g, "")}`}>{profile.phone}</a>
                 </div>
-                <div className="col-sm-6 col-lg-3"><strong><FaLinkedin /> LinkedIn</strong><br /><a className="contact-link" href={profile.linkedin} target="_blank" rel="noreferrer">dinakarankommunuri</a></div>
+                <div className="col-md-6 col-xl-3"><strong><FaLinkedin /> LinkedIn</strong><br /><a className="contact-link" href={profile.linkedin} target="_blank" rel="noreferrer">dinakarankommunuri</a></div>
               </div>
             </div>
           </div>
