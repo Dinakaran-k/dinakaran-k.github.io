@@ -308,6 +308,48 @@ a:hover { text-decoration: underline; }
   line-height: 1.62;
 }
 
+.about-hero-panel {
+  background:
+    radial-gradient(40rem 20rem at 10% -20%, rgba(56, 189, 248, 0.16), transparent 60%),
+    radial-gradient(34rem 18rem at 95% -30%, rgba(65, 226, 155, 0.14), transparent 62%),
+    var(--card);
+}
+
+.mini-badge {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.22rem 0.64rem;
+  font-size: 0.72rem;
+  color: var(--text);
+  background: color-mix(in oklab, var(--bg-soft) 80%, var(--brand-2) 20%);
+}
+
+.about-highlight-card {
+  height: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  padding: 0.72rem 0.72rem;
+  background: color-mix(in oklab, var(--bg-soft) 86%, var(--brand-2) 14%);
+  transition: transform 0.28s ease, border-color 0.28s ease;
+}
+
+.about-highlight-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklab, var(--brand-2) 40%, var(--line));
+}
+
+.about-highlight-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 0.45rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.4rem;
+  border: 1px solid var(--line);
+  color: var(--brand-2);
+}
+
 .meta-grid {
   row-gap: 0.95rem !important;
 }
@@ -337,6 +379,17 @@ a:hover { text-decoration: underline; }
 .contact-link:hover {
   color: var(--brand-2);
   border-color: color-mix(in oklab, var(--brand-2) 90%, transparent);
+}
+
+.education-card .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.edu-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
 }
 
 .timeline-wrap { position: relative; display: grid; gap: 1rem; }
@@ -482,4 +535,5 @@ a:hover { text-decoration: underline; }
   .cta-band { flex-direction: column; align-items: flex-start; }
   .bubble { font-size: 0.7rem; padding: 0.3rem 0.58rem; }
   .meta-grid > div { min-height: 0; }
+  .about-highlight-card { padding: 0.64rem; }
 }

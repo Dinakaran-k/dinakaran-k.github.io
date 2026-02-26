@@ -12,7 +12,9 @@ import {
   FaGraduationCap,
   FaLinkedin,
   FaLocationDot,
+  FaMedal,
   FaPhone,
+  FaRocket,
   FaMoon,
   FaRegStar,
   FaSun,
@@ -139,6 +141,31 @@ const skillTicker = [
   "GraphQL",
   "New Relic",
   "Play Store Release"
+];
+
+const clientValuePoints = [
+  {
+    icon: <FaRocket />,
+    title: "Outcome-First Delivery",
+    text: "Build features that ship on time and map cleanly to product goals."
+  },
+  {
+    icon: <FaFire />,
+    title: "Production Stability",
+    text: "Crash-focused debugging and performance tuning for dependable releases."
+  },
+  {
+    icon: <FaBriefcase />,
+    title: "Enterprise Collaboration",
+    text: "Strong sync with QA, backend, and design in Agile delivery cycles."
+  }
+];
+
+const educationStrengths = [
+  "Systems thinking",
+  "Analytical debugging",
+  "Structured problem solving",
+  "Documentation discipline"
 ];
 
 function Section({ id, title, icon, subtitle, children }) {
@@ -372,8 +399,27 @@ export default function App() {
       <Section id="about" title="About Me" icon={<FaUserTie />} subtitle="Profile details updated from your latest resume.">
         <div className="row g-4 align-items-stretch">
           <div className="col-lg-8">
-            <div className="glass-card h-100">
+            <div className="glass-card h-100 about-hero-panel">
+              <div className="d-flex flex-wrap gap-2 mb-3">
+                <span className="mini-badge">Open to Client Engagements</span>
+                <span className="mini-badge">Android + Flutter Delivery</span>
+                <span className="mini-badge">Release Ownership</span>
+              </div>
+
               <p className="mb-4 about-summary">{profile.summary}</p>
+
+              <div className="row g-3 mb-3">
+                {clientValuePoints.map((item) => (
+                  <div className="col-md-4" key={item.title}>
+                    <article className="about-highlight-card">
+                      <span className="about-highlight-icon">{item.icon}</span>
+                      <h3 className="h6 mb-1">{item.title}</h3>
+                      <p className="mb-0 section-minor small">{item.text}</p>
+                    </article>
+                  </div>
+                ))}
+              </div>
+
               <div className="row g-3 meta-grid">
                 <div className="col-md-6 col-xl-3"><strong><FaLocationDot /> Location</strong><br />{profile.location}</div>
                 <div className="col-md-6 col-xl-3">
@@ -389,12 +435,21 @@ export default function App() {
             </div>
           </div>
           <div className="col-lg-4">
-            <div className="glass-card h-100">
+            <div className="glass-card h-100 education-card">
               <h3 className="h6 text-uppercase section-minor mb-3"><FaGraduationCap /> Education</h3>
+              <p className="section-minor mb-2">Academic Foundation</p>
               <h4 className="h5 mb-1">{profile.education.degree}</h4>
               <p className="mb-1">{profile.education.institution}</p>
               <p className="mb-2 section-minor">{profile.education.startDate} - {profile.education.endDate}</p>
-              <span className="badge text-bg-secondary">{profile.education.score}</span>
+              <span className="badge text-bg-secondary mb-3"><FaMedal /> {profile.education.score}</span>
+
+              <div className="edu-divider my-3" />
+              <p className="section-minor mb-2">Strengths that support client work</p>
+              <div className="d-flex flex-wrap gap-2">
+                {educationStrengths.map((item) => (
+                  <span key={item} className="skill-pill">{item}</span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
