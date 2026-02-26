@@ -274,7 +274,7 @@ a:hover { text-decoration: underline; }
 .stat-card small { color: var(--muted); }
 
 .orbit-panel {
-  min-height: 360px;
+  min-height: 320px;
   position: relative;
   border: 1px solid var(--line);
   border-radius: 1.1rem;
@@ -284,12 +284,11 @@ a:hover { text-decoration: underline; }
     linear-gradient(145deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--bg-soft) 88%, var(--brand-2) 12%));
   overflow: hidden;
   box-shadow: var(--card-shadow);
-  transform: perspective(1000px) rotateX(2deg) rotateY(-2deg);
-  transition: transform 0.45s ease, box-shadow 0.45s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 .orbit-panel:hover {
-  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(-3px);
-  box-shadow: 0 24px 45px rgba(8, 24, 56, 0.34);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(8, 24, 56, 0.3);
 }
 
 .orbit-panel::before {
@@ -307,8 +306,8 @@ a:hover { text-decoration: underline; }
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 132px;
-  height: 132px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -327,79 +326,50 @@ a:hover { text-decoration: underline; }
 }
 
 .orbit-core span {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   letter-spacing: 0.02em;
   color: var(--text);
 }
 
-.nucleus-pulse {
+.orbit-ring {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 170px;
-  height: 170px;
+  border: 1px dashed color-mix(in oklab, var(--brand-2) 55%, var(--line));
   border-radius: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid color-mix(in oklab, var(--brand-2) 40%, var(--line));
-  box-shadow: 0 0 36px rgba(56, 189, 248, 0.15);
-  animation: nucleusPulse 3.8s ease-in-out infinite;
   pointer-events: none;
 }
 
-.orbit-shell {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: var(--orbit-size);
-  height: var(--orbit-size);
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 1px dashed color-mix(in oklab, var(--brand-2) 52%, var(--line));
-  animation: shellSpin var(--duration) linear infinite;
-  z-index: 1;
+.ring-one {
+  inset: 10% 14%;
+  animation: spin 18s linear infinite;
 }
 
-.orbit-electron {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: rotate(var(--start)) translateX(calc(var(--orbit-size) / 2));
-  transform-origin: 0 0;
+.ring-two {
+  inset: 23% 24%;
+  animation: spinReverse 12s linear infinite;
 }
 
-.orbit-electron > span {
+.orbit-node {
   position: absolute;
-  transform: translate(-50%, -50%);
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
+  gap: 0.35rem;
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 0.32rem 0.64rem;
-  min-width: 112px;
-  font-size: 0.82rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
   font-weight: 600;
   background: color-mix(in oklab, var(--bg-soft) 78%, var(--brand-2) 22%);
   color: var(--text);
-  animation: shellCounter var(--duration) linear infinite;
-  box-shadow: 0 5px 18px rgba(2, 10, 24, 0.26);
+  animation: bob 4.6s ease-in-out infinite;
+  box-shadow: 0 6px 20px rgba(2, 10, 24, 0.26);
   white-space: nowrap;
+  z-index: 3;
 }
 
-.shell-a { --orbit-size: 344px; --duration: 28s; }
-.shell-b { --orbit-size: 300px; --duration: 23s; }
-.shell-c { --orbit-size: 256px; --duration: 19s; }
-.shell-d { --orbit-size: 216px; --duration: 16s; }
-.shell-e { --orbit-size: 182px; --duration: 13s; }
-.shell-f { --orbit-size: 152px; --duration: 11s; }
-
-.e1 { --start: 8deg; }
-.e2 { --start: 74deg; }
-.e3 { --start: 154deg; }
-.e4 { --start: 220deg; }
-.e5 { --start: 294deg; }
-.e6 { --start: 338deg; }
+.n1 { top: 10%; left: 6%; animation-delay: -0.2s; }
+.n2 { top: 10%; right: 6%; animation-delay: -1.2s; }
+.n3 { bottom: 10%; left: 9%; animation-delay: -2.3s; }
+.n4 { bottom: 10%; right: 6%; animation-delay: -3.3s; }
 
 .ticker-wrap {
   position: relative;
@@ -782,8 +752,7 @@ a:hover { text-decoration: underline; }
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes shellSpin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
-@keyframes shellCounter { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(-360deg); } }
+@keyframes spinReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
 @keyframes fadeLift {
   from { opacity: 0.72; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
@@ -800,34 +769,23 @@ a:hover { text-decoration: underline; }
   0%, 20% { transform: translateX(-130%); }
   45%, 100% { transform: translateX(130%); }
 }
-@keyframes nucleusPulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(0.96); opacity: 0.52; }
-  50% { transform: translate(-50%, -50%) scale(1.04); opacity: 0.88; }
-}
 @keyframes decoDrift {
   0%, 100% { transform: translateY(0) scale(1); opacity: 0.5; }
   50% { transform: translateY(-8px) scale(1.08); opacity: 0.9; }
 }
 
 @media (max-width: 991px) {
-  .orbit-panel { min-height: 300px; }
+  .orbit-panel { min-height: 280px; }
   .orbit-core {
-    width: 114px;
-    height: 114px;
+    width: 102px;
+    height: 102px;
   }
-  .orbit-core span { font-size: 0.8rem; }
-  .nucleus-pulse { width: 146px; height: 146px; }
-  .orbit-electron > span {
-    min-width: 98px;
-    font-size: 0.74rem;
-    padding: 0.26rem 0.52rem;
-  }
-  .shell-a { --orbit-size: 292px; }
-  .shell-b { --orbit-size: 260px; }
-  .shell-c { --orbit-size: 226px; }
-  .shell-d { --orbit-size: 194px; }
-  .shell-e { --orbit-size: 164px; }
-  .shell-f { --orbit-size: 136px; }
+  .orbit-core span { font-size: 0.7rem; }
+  .orbit-node { font-size: 0.72rem; padding: 0.34rem 0.68rem; }
+  .n1 { top: 9%; left: 4%; }
+  .n2 { top: 9%; right: 4%; }
+  .n3 { bottom: 8%; left: 6%; }
+  .n4 { bottom: 8%; right: 4%; }
   .hero-deco { display: none; }
 }
 
@@ -841,23 +799,16 @@ a:hover { text-decoration: underline; }
   .ticker-item { padding: 0.58rem 0.78rem; font-size: 0.76rem; }
   .repo-desc { min-height: 0; }
   .cta-band { flex-direction: column; align-items: flex-start; }
-  .orbit-panel { min-height: 250px; }
-  .orbit-core { width: 96px; height: 96px; }
-  .orbit-core span { font-size: 0.72rem; }
-  .nucleus-pulse { width: 122px; height: 122px; }
-  .orbit-electron > span {
-    min-width: 88px;
-    font-size: 0.68rem;
-    padding: 0.22rem 0.42rem;
-  }
-  .shell-a { --orbit-size: 230px; }
-  .shell-b { --orbit-size: 204px; }
-  .shell-c { --orbit-size: 178px; }
-  .shell-d { --orbit-size: 154px; }
-  .shell-e { --orbit-size: 130px; }
-  .shell-f { --orbit-size: 108px; }
-  .shell-e,
-  .shell-f { display: none; }
+  .orbit-panel { min-height: 230px; }
+  .orbit-core { width: 90px; height: 90px; }
+  .orbit-core span { font-size: 0.64rem; }
+  .orbit-node { font-size: 0.66rem; padding: 0.28rem 0.56rem; }
+  .ring-one { inset: 12% 16%; }
+  .ring-two { inset: 24% 26%; }
+  .n1 { top: 8%; left: 4%; }
+  .n2 { top: 8%; right: 4%; }
+  .n3 { bottom: 8%; left: 6%; }
+  .n4 { bottom: 8%; right: 4%; }
   .meta-grid > div { min-height: 0; }
   .meta-action-row { justify-content: flex-start; }
   .about-highlight-card { padding: 0.64rem; }
