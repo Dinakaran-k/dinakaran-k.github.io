@@ -2,6 +2,7 @@
 import {
   FaAndroid,
   FaArrowRight,
+  FaArrowUpRightFromSquare,
   FaBolt,
   FaBriefcase,
   FaCodeBranch,
@@ -424,13 +425,19 @@ export default function App() {
                 <div className="col-md-6 col-xl-3"><strong><FaLocationDot /> Location</strong><br />{profile.location}</div>
                 <div className="col-md-6 col-xl-3">
                   <strong><FaEnvelope /> Email</strong><br />
-                  <a className="contact-link" href={`mailto:${profile.email}`}>{profile.email}</a>
+                  <a className="contact-link d-inline-flex align-items-center gap-1" href={`mailto:${profile.email}`}>
+                    <FaEnvelope />
+                    {profile.email}
+                  </a>
                 </div>
                 <div className="col-md-6 col-xl-3">
                   <strong><FaPhone /> Mobile</strong><br />
-                  <a className="contact-link" href={`tel:${profile.phone.replace(/\s+/g, "")}`}>{profile.phone}</a>
+                  <a className="contact-link d-inline-flex align-items-center gap-1" href={`tel:${profile.phone.replace(/\s+/g, "")}`}>
+                    <FaPhone />
+                    {profile.phone}
+                  </a>
                 </div>
-                <div className="col-md-6 col-xl-3"><strong><FaLinkedin /> LinkedIn</strong><br /><a className="contact-link" href={profile.linkedin} target="_blank" rel="noreferrer">dinakarankommunuri</a></div>
+                <div className="col-md-6 col-xl-3"><strong><FaLinkedin /> LinkedIn</strong><br /><a className="contact-link d-inline-flex align-items-center gap-1" href={profile.linkedin} target="_blank" rel="noreferrer"><FaLinkedin /> dinakarankommunuri <FaArrowUpRightFromSquare /></a></div>
               </div>
             </div>
           </div>

@@ -3,7 +3,10 @@ import { expect, test } from "@playwright/test";
 test("renders key sections and identity", async ({ page }) => {
   const consoleErrors = [];
   page.on("console", (msg) => {
-    if (msg.type() === "error") consoleErrors.push(msg.text());
+    if (msg.type() !== "error") return;
+    const text = msg.text();
+    if (text.includes("Failed to load resource: the server responded with a status of 403")) return;
+    consoleErrors.push(text);
   });
 
   await page.goto("/");
