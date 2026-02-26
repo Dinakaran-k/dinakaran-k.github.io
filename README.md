@@ -1,6 +1,6 @@
 # Android Developer Portfolio (GitHub Pages)
 
-This project is now optimized for static hosting on `https://dinakaran-k.github.io/dinakarank.github.io/`.
+This project is now optimized for static hosting on `https://dinakaran-k.github.io/`.
 
 ## What this supports
 - React + Bootstrap responsive portfolio
@@ -30,8 +30,8 @@ VITE_GITHUB_USERNAME=Dinakaran-k
 VITE_GA_MEASUREMENT_ID=
 ```
 
-## Deploy to `https://dinakaran-k.github.io/dinakarank.github.io/`
-1. Use repo `dinakarank.github.io` under account `Dinakaran-k`.
+## Deploy to `https://dinakaran-k.github.io/`
+1. Use repo `Dinakaran-k.github.io` under account `Dinakaran-k`.
 2. Push this code to the `main` branch.
 3. In GitHub repo settings:
    - `Settings > Pages > Build and deployment`.
