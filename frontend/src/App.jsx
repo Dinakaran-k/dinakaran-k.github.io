@@ -2,6 +2,7 @@
 import {
   FaAndroid,
   FaArrowRight,
+  FaBookOpen,
   FaArrowUpRightFromSquare,
   FaBolt,
   FaBriefcase,
@@ -351,10 +352,10 @@ export default function App() {
               <span className="brand-dot" />
             </a>
             <div className="d-flex align-items-center gap-2">
-              <a className="btn btn-sm btn-outline-light nav-chip d-none d-md-inline" href="#projects"><FaCodeBranch /> Projects</a>
-              <a className="btn btn-sm btn-outline-light nav-chip d-none d-md-inline" href="#contact"><FaUserTie /> Hire Me</a>
-              <button className="btn btn-sm btn-outline-light nav-chip" onClick={() => setDarkMode((v) => !v)}>
-                {darkMode ? <><FaSun /> Light</> : <><FaMoon /> Dark</>}
+              <a className="btn btn-sm btn-outline-light nav-chip d-none d-md-inline" href="#projects" aria-label="Projects" title="Projects"><FaCodeBranch /></a>
+              <a className="btn btn-sm btn-outline-light nav-chip d-none d-md-inline" href="#contact" aria-label="Hire Me" title="Hire Me"><FaUserTie /></a>
+              <button className="btn btn-sm btn-outline-light nav-chip" onClick={() => setDarkMode((v) => !v)} aria-label={darkMode ? "Switch to light theme" : "Switch to dark theme"} title={darkMode ? "Light theme" : "Dark theme"}>
+                {darkMode ? <FaSun /> : <FaMoon />}
               </button>
             </div>
           </div>
@@ -367,9 +368,9 @@ export default function App() {
               <h1 className="hero-title mb-3">{profile.role}</h1>
               <p className="hero-copy mb-4">{profile.summary}</p>
               <div className="d-flex flex-wrap gap-3 mb-4">
-                <a className="btn btn-lg btn-accent" href="#contact"><FaWandMagicSparkles /> Open To Work</a>
-                <a className="btn btn-lg btn-ghost" href={resumeUrl} download><FaArrowRight /> Download Resume</a>
-                <a className="btn btn-lg btn-ghost" href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer"><FaGithub /> GitHub</a>
+                <a className="btn btn-lg btn-accent icon-only-cta" href="#contact" aria-label="Open to work" title="Open to work"><FaWandMagicSparkles /></a>
+                <a className="btn btn-lg btn-ghost icon-only-cta" href={resumeUrl} download aria-label="Download resume" title="Download resume"><FaBookOpen /></a>
+                <a className="btn btn-lg btn-ghost icon-only-cta" href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer" aria-label="GitHub profile" title="GitHub profile"><FaGithub /></a>
               </div>
               <div className="stat-row">
                 <div className="stat-card"><span>4 Years</span><small>Mobile App Engineering</small></div>
@@ -425,19 +426,15 @@ export default function App() {
                 <div className="col-md-6 col-xl-3"><strong><FaLocationDot /> Location</strong><br />{profile.location}</div>
                 <div className="col-md-6 col-xl-3">
                   <strong><FaEnvelope /> Email</strong><br />
-                  <a className="contact-link d-inline-flex align-items-center gap-1" href={`mailto:${profile.email}`}>
-                    <FaEnvelope />
-                    {profile.email}
-                  </a>
+                  <span>{profile.email}</span>
+                  <a className="contact-link icon-only-link ms-2" href={`mailto:${profile.email}`} aria-label="Send email" title="Send email"><FaEnvelope /></a>
                 </div>
                 <div className="col-md-6 col-xl-3">
                   <strong><FaPhone /> Mobile</strong><br />
-                  <a className="contact-link d-inline-flex align-items-center gap-1" href={`tel:${profile.phone.replace(/\s+/g, "")}`}>
-                    <FaPhone />
-                    {profile.phone}
-                  </a>
+                  <span>{profile.phone}</span>
+                  <a className="contact-link icon-only-link ms-2" href={`tel:${profile.phone.replace(/\s+/g, "")}`} aria-label="Call mobile number" title="Call"><FaPhone /></a>
                 </div>
-                <div className="col-md-6 col-xl-3"><strong><FaLinkedin /> LinkedIn</strong><br /><a className="contact-link d-inline-flex align-items-center gap-1" href={profile.linkedin} target="_blank" rel="noreferrer"><FaLinkedin /> dinakarankommunuri <FaArrowUpRightFromSquare /></a></div>
+                <div className="col-md-6 col-xl-3"><strong><FaLinkedin /> LinkedIn</strong><br /><span>dinakarankommunuri</span><a className="contact-link icon-only-link ms-2" href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="Open LinkedIn profile" title="LinkedIn"><FaArrowUpRightFromSquare /></a></div>
               </div>
             </div>
           </div>
@@ -507,7 +504,7 @@ export default function App() {
                 <h4 className="h6 mb-2">{proj.title}</h4>
                 <p className="project-impact"><FaFire /> {proj.impact}</p>
                 <small className="d-block mb-3 section-minor">{proj.technologies.join(", ")}</small>
-                <a href={proj.playStoreUrl} target="_blank" rel="noreferrer"><FaGooglePlay /> Open Play Store</a>
+                <a className="icon-only-link" href={proj.playStoreUrl} target="_blank" rel="noreferrer" aria-label={`Open ${proj.title} on Play Store`} title="Play Store"><FaGooglePlay /></a>
               </article>
             </div>
           ))}
@@ -515,7 +512,7 @@ export default function App() {
 
         <div className="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
           <h3 className="h5 mb-0">GitHub Repositories (Auto-updated)</h3>
-          <a href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer"><FaGithub /> View all on GitHub</a>
+          <a className="icon-only-link" href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer" aria-label="View all repositories on GitHub" title="All GitHub repositories"><FaGithub /></a>
         </div>
 
         {githubLoading && <p className="section-minor">Loading GitHub repositories...</p>}
@@ -533,7 +530,7 @@ export default function App() {
                   <p className="small mb-3 repo-desc">{repo.description}</p>
                   <small className="d-block section-minor mb-2">{repo.language} | <FaRegStar /> {repo.stars}</small>
                   <small className="d-block section-minor mb-3">Updated {repo.updated}</small>
-                  <a href={repo.repoUrl} target="_blank" rel="noreferrer"><FaGithub /> Open Repository</a>
+                  <a className="icon-only-link" href={repo.repoUrl} target="_blank" rel="noreferrer" aria-label={`Open repository ${repo.title}`} title="Open repository"><FaGithub /></a>
                 </article>
               </div>
             ))}
@@ -558,7 +555,7 @@ export default function App() {
               <h3 className="mb-1">Available for Android freelance and full-time opportunities</h3>
               <p className="mb-0 section-minor">Let us discuss product goals, architecture, and release timelines.</p>
             </div>
-            <a className="btn btn-accent" href="#contact"><FaArrowRight /> Start Conversation</a>
+            <a className="btn btn-accent icon-only-cta" href="#contact" aria-label="Start conversation" title="Start conversation"><FaArrowRight /></a>
           </div>
         </div>
       </section>
@@ -579,7 +576,7 @@ export default function App() {
           </div>
           <div className="col-12 d-flex flex-wrap align-items-center gap-3">
             <button className="btn btn-accent btn-lg" type="submit"><FaEnvelope /> Send Message</button>
-            <a href={profile.linkedin} target="_blank" rel="noreferrer"><FaLinkedin /> LinkedIn</a>
+            <a className="icon-only-link" href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="Open LinkedIn profile" title="LinkedIn"><FaLinkedin /></a>
           </div>
         </form>
       </Section>
