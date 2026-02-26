@@ -1,6 +1,6 @@
 # Android Developer Portfolio (GitHub Pages)
 
-This project is now optimized for static hosting on `https://dinakarank.github.io/`.
+This project is now optimized for static hosting on `https://dinakaran-k.github.io/dinakarank.github.io/`.
 
 ## What this supports
 - React + Bootstrap responsive portfolio
@@ -30,8 +30,8 @@ VITE_GITHUB_USERNAME=Dinakaran-k
 VITE_GA_MEASUREMENT_ID=
 ```
 
-## Deploy to `https://dinakarank.github.io/`
-1. Create a repo named exactly `dinakarank.github.io`.
+## Deploy to `https://dinakaran-k.github.io/dinakarank.github.io/`
+1. Use repo `dinakarank.github.io` under account `Dinakaran-k`.
 2. Push this code to the `main` branch.
 3. In GitHub repo settings:
    - `Settings > Pages > Build and deployment`.
@@ -46,5 +46,5 @@ VITE_GA_MEASUREMENT_ID=
 - Anonymous GitHub API has rate limits (usually 60 requests/hour per IP).
 - Contact form uses `mailto:` to work without backend.
 
-## If you use a project repo (not `dinakarank.github.io`)
+## If you use a different project repo path
 Set `base` in `frontend/vite.config.js` to `/<repo-name>/`.
