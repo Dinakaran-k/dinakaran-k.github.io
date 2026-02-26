@@ -37,6 +37,8 @@ const profile = {
   phone: "+91 8096475183",
   linkedin: "https://www.linkedin.com/in/dinakarankommunuri/",
   githubUsername: GITHUB_USERNAME,
+  heroIntro:
+    "Shipping stable Android and Flutter apps for enterprise clients with strong ownership across architecture, performance, and production releases.",
   summary:
     "Android Engineer with 4 years of hands-on experience building and maintaining production-grade mobile applications using Kotlin and Flutter. Strong expertise in native Android development with a growing focus on cross-platform solutions using Flutter and Dart. Proven track record in performance optimization, application stability, and scalable architecture using Jetpack Compose, MVVM, and Clean Architecture. Experienced in delivering enterprise-scale applications, resolving production issues, supporting releases, and collaborating closely with cross-functional teams throughout the software development lifecycle in Agile environments.",
   education: {
@@ -366,7 +368,7 @@ export default function App() {
             <div className="col-lg-7">
               <div className="hero-pill mb-3"><FaFire /> {profile.headline}</div>
               <h1 className="hero-title mb-3">{profile.role}</h1>
-              <p className="hero-copy mb-4">{profile.summary}</p>
+              <p className="hero-copy mb-4">{profile.heroIntro}</p>
               <div className="d-flex flex-wrap gap-3 mb-4">
                 <a className="btn btn-lg btn-accent icon-only-cta" href="#contact" aria-label="Open to work" title="Open to work"><FaWandMagicSparkles /></a>
                 <a className="btn btn-lg btn-ghost icon-only-cta" href={resumeUrl} download aria-label="Download resume" title="Download resume"><FaBookOpen /></a>
@@ -380,10 +382,16 @@ export default function App() {
             </div>
             <div className="col-lg-5">
               <div className="orbit-panel">
-                <div className="bubble b1"><FaAndroid /> Kotlin</div>
-                <div className="bubble b2"><FaBolt /> Flutter</div>
-                <div className="bubble b3"><FaTerminal /> MVVM</div>
-                <div className="bubble b4"><FaFire /> Crashlytics</div>
+                <div className="orbit-ring ring-one" />
+                <div className="orbit-ring ring-two" />
+                <div className="orbit-core">
+                  <FaAndroid />
+                  <span>Mobile Stack</span>
+                </div>
+                <div className="orbit-node n1"><FaAndroid /> Kotlin</div>
+                <div className="orbit-node n2"><FaBolt /> Flutter</div>
+                <div className="orbit-node n3"><FaTerminal /> MVVM</div>
+                <div className="orbit-node n4"><FaFire /> Crashlytics</div>
               </div>
             </div>
           </div>

@@ -186,8 +186,9 @@ a:hover { text-decoration: underline; }
 
 .hero-copy {
   color: var(--muted);
-  max-width: 72ch;
-  line-height: 1.58;
+  max-width: 62ch;
+  line-height: 1.65;
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
 }
 
 .btn-accent {
@@ -226,7 +227,10 @@ a:hover { text-decoration: underline; }
   position: relative;
   border: 1px solid var(--line);
   border-radius: 1.1rem;
-  background: linear-gradient(145deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--bg-soft) 88%, var(--brand-2) 12%));
+  background:
+    radial-gradient(20rem 12rem at 22% 18%, rgba(56, 189, 248, 0.2), transparent 65%),
+    radial-gradient(16rem 12rem at 80% 80%, rgba(167, 139, 250, 0.18), transparent 70%),
+    linear-gradient(145deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--bg-soft) 88%, var(--brand-2) 12%));
   overflow: hidden;
   box-shadow: var(--card-shadow);
 }
@@ -234,13 +238,61 @@ a:hover { text-decoration: underline; }
 .orbit-panel::before {
   content: "";
   position: absolute;
-  inset: 20% 18%;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.16) 50%, transparent 100%);
+  transform: translateX(-130%);
+  animation: panelSweep 6.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.orbit-ring {
+  position: absolute;
   border: 1px dashed color-mix(in oklab, var(--brand-2) 55%, var(--line));
   border-radius: 50%;
+  pointer-events: none;
+}
+
+.ring-one {
+  inset: 13% 18%;
   animation: spin 18s linear infinite;
 }
 
-.bubble {
+.ring-two {
+  inset: 26% 26%;
+  animation: spinReverse 12s linear infinite;
+}
+
+.orbit-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  background: linear-gradient(140deg, rgba(56, 189, 248, 0.3), rgba(12, 22, 42, 0.86));
+  border: 1px solid color-mix(in oklab, var(--brand-2) 50%, var(--line));
+  box-shadow: 0 0 26px rgba(56, 189, 248, 0.2);
+  z-index: 2;
+}
+
+.orbit-core svg {
+  font-size: 1.3rem;
+  color: var(--brand-2);
+}
+
+.orbit-core span {
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+.orbit-node {
   position: absolute;
   display: inline-flex;
   align-items: center;
@@ -252,12 +304,13 @@ a:hover { text-decoration: underline; }
   background: color-mix(in oklab, var(--bg-soft) 78%, var(--brand-2) 22%);
   color: var(--text);
   animation: bob 4.6s ease-in-out infinite;
+  z-index: 3;
 }
 
-.b1 { top: 22%; left: 8%; animation-delay: -0.2s; }
-.b2 { top: 12%; right: 8%; animation-delay: -1.2s; }
-.b3 { bottom: 18%; left: 14%; animation-delay: -2.3s; }
-.b4 { bottom: 10%; right: 10%; animation-delay: -3.3s; }
+.n1 { top: 12%; left: 6%; animation-delay: -0.2s; }
+.n2 { top: 12%; right: 6%; animation-delay: -1.2s; }
+.n3 { bottom: 12%; left: 8%; animation-delay: -2.3s; }
+.n4 { bottom: 12%; right: 6%; animation-delay: -3.3s; }
 
 .ticker-wrap {
   position: relative;
@@ -440,8 +493,8 @@ a:hover { text-decoration: underline; }
   margin-top: 0.2rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.55rem;
+  justify-content: flex-start;
+  gap: 0.45rem;
   min-width: 0;
 }
 
@@ -615,6 +668,7 @@ a:hover { text-decoration: underline; }
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes spinReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
 @keyframes fadeLift {
   from { opacity: 0.72; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
@@ -627,13 +681,22 @@ a:hover { text-decoration: underline; }
   0%, 100% { transform: translateY(0) rotate(0deg); border-radius: 40% 60% 55% 45%; }
   50% { transform: translateY(-14px) rotate(10deg); border-radius: 58% 42% 40% 60%; }
 }
+@keyframes panelSweep {
+  0%, 20% { transform: translateX(-130%); }
+  45%, 100% { transform: translateX(130%); }
+}
 
 @media (max-width: 991px) {
-  .orbit-panel { min-height: 170px; }
-  .b1 { top: 18%; left: 8%; }
-  .b2 { top: 14%; right: 8%; }
-  .b3 { bottom: 16%; left: 14%; }
-  .b4 { bottom: 10%; right: 10%; }
+  .orbit-panel { min-height: 185px; }
+  .orbit-core {
+    width: 96px;
+    height: 96px;
+  }
+  .orbit-node { font-size: 0.72rem; }
+  .n1 { top: 10%; left: 5%; }
+  .n2 { top: 10%; right: 5%; }
+  .n3 { bottom: 10%; left: 6%; }
+  .n4 { bottom: 10%; right: 5%; }
 }
 
 @media (max-width: 767px) {
@@ -646,7 +709,9 @@ a:hover { text-decoration: underline; }
   .ticker-item { padding: 0.58rem 0.78rem; font-size: 0.76rem; }
   .repo-desc { min-height: 0; }
   .cta-band { flex-direction: column; align-items: flex-start; }
-  .bubble { font-size: 0.7rem; padding: 0.3rem 0.58rem; }
+  .orbit-panel { min-height: 210px; }
+  .orbit-node { font-size: 0.7rem; padding: 0.3rem 0.58rem; }
+  .orbit-core { width: 88px; height: 88px; }
   .meta-grid > div { min-height: 0; }
   .meta-action-row { justify-content: flex-start; }
   .about-highlight-card { padding: 0.64rem; }
