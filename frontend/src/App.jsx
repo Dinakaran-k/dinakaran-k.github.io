@@ -104,6 +104,7 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem("theme") === "dark");
   const [githubProjects, setGithubProjects] = useState([]);
   const [githubError, setGithubError] = useState("");
+  const [githubLoading, setGithubLoading] = useState(true);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-bs-theme", darkMode ? "dark" : "light");
@@ -160,6 +161,8 @@ export default function App() {
         setGithubProjects(mapped);
       } catch (error) {
         setGithubError(error.message);
+      } finally {
+        setGithubLoading(false);
       }
     }
 
@@ -283,7 +286,16 @@ export default function App() {
         </div>
 
         <h3 className="h5 mb-3">GitHub Repositories (Auto-updated)</h3>
+        {githubLoading && <p>Loading GitHub repositories...</p>}
         {githubError && <p className="text-danger">{githubError}</p>}
+        {!githubLoading && !githubError && githubProjects.length === 0 && (
+          <p>
+            No repositories loaded right now.{" "}
+            <a href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer">
+              View GitHub profile
+            </a>
+          </p>
+        )}
         <div className="row g-3">
           {githubProjects.map((repo) => (
             <div className="col-lg-4 col-md-6" key={repo.repoUrl}>
