@@ -245,30 +245,13 @@ a:hover { text-decoration: underline; }
   pointer-events: none;
 }
 
-.orbit-ring {
-  position: absolute;
-  border: 1px dashed color-mix(in oklab, var(--brand-2) 55%, var(--line));
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.ring-one {
-  inset: 13% 18%;
-  animation: spin 18s linear infinite;
-}
-
-.ring-two {
-  inset: 26% 26%;
-  animation: spinReverse 12s linear infinite;
-}
-
 .orbit-core {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 116px;
-  height: 116px;
+  width: 104px;
+  height: 104px;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -292,25 +275,74 @@ a:hover { text-decoration: underline; }
   color: var(--text);
 }
 
-.orbit-node {
+.nucleus-pulse {
   position: absolute;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.35rem 0.72rem;
-  font-size: 0.78rem;
-  background: color-mix(in oklab, var(--bg-soft) 78%, var(--brand-2) 22%);
-  color: var(--text);
-  animation: bob 4.6s ease-in-out infinite;
-  z-index: 3;
+  left: 50%;
+  top: 50%;
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid color-mix(in oklab, var(--brand-2) 40%, var(--line));
+  box-shadow: 0 0 36px rgba(56, 189, 248, 0.15);
+  animation: nucleusPulse 3.8s ease-in-out infinite;
+  pointer-events: none;
 }
 
-.n1 { top: 12%; left: 6%; animation-delay: -0.2s; }
-.n2 { top: 12%; right: 6%; animation-delay: -1.2s; }
-.n3 { bottom: 12%; left: 8%; animation-delay: -2.3s; }
-.n4 { bottom: 12%; right: 6%; animation-delay: -3.3s; }
+.orbit-shell {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--orbit-size);
+  height: var(--orbit-size);
+  transform: translate(-50%, -50%) rotate(var(--tilt));
+  border-radius: 50%;
+  border: 1px dashed color-mix(in oklab, var(--brand-2) 52%, var(--line));
+  animation: shellSpin var(--duration) linear infinite;
+  z-index: 1;
+}
+
+.orbit-electron {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: rotate(var(--start)) translateX(calc(var(--orbit-size) / 2));
+  transform-origin: 0 0;
+}
+
+.orbit-electron > span {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.32rem 0.64rem;
+  min-width: 86px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: color-mix(in oklab, var(--bg-soft) 78%, var(--brand-2) 22%);
+  color: var(--text);
+  animation: shellCounter var(--duration) linear infinite;
+  box-shadow: 0 5px 18px rgba(2, 10, 24, 0.26);
+  white-space: nowrap;
+}
+
+.shell-a { --orbit-size: 278px; --duration: 18s; --tilt: 22deg; }
+.shell-b { --orbit-size: 248px; --duration: 14s; --tilt: -26deg; }
+.shell-c { --orbit-size: 216px; --duration: 12.5s; --tilt: 64deg; }
+.shell-d { --orbit-size: 184px; --duration: 11s; --tilt: -58deg; }
+.shell-e { --orbit-size: 160px; --duration: 9s; --tilt: 0deg; }
+.shell-f { --orbit-size: 138px; --duration: 7.5s; --tilt: 38deg; }
+
+.e1 { --start: 16deg; }
+.e2 { --start: 128deg; }
+.e3 { --start: 234deg; }
+.e4 { --start: 308deg; }
+.e5 { --start: 204deg; }
+.e6 { --start: 24deg; }
 
 .ticker-wrap {
   position: relative;
@@ -668,7 +700,8 @@ a:hover { text-decoration: underline; }
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes spinReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+@keyframes shellSpin { from { transform: translate(-50%, -50%) rotate(var(--tilt)); } to { transform: translate(-50%, -50%) rotate(calc(var(--tilt) + 360deg)); } }
+@keyframes shellCounter { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(-360deg); } }
 @keyframes fadeLift {
   from { opacity: 0.72; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
@@ -685,18 +718,29 @@ a:hover { text-decoration: underline; }
   0%, 20% { transform: translateX(-130%); }
   45%, 100% { transform: translateX(130%); }
 }
+@keyframes nucleusPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.96); opacity: 0.52; }
+  50% { transform: translate(-50%, -50%) scale(1.04); opacity: 0.88; }
+}
 
 @media (max-width: 991px) {
   .orbit-panel { min-height: 185px; }
   .orbit-core {
-    width: 96px;
-    height: 96px;
+    width: 90px;
+    height: 90px;
   }
-  .orbit-node { font-size: 0.72rem; }
-  .n1 { top: 10%; left: 5%; }
-  .n2 { top: 10%; right: 5%; }
-  .n3 { bottom: 10%; left: 6%; }
-  .n4 { bottom: 10%; right: 5%; }
+  .nucleus-pulse { width: 112px; height: 112px; }
+  .orbit-electron > span {
+    min-width: 72px;
+    font-size: 0.66rem;
+    padding: 0.26rem 0.48rem;
+  }
+  .shell-a { --orbit-size: 240px; }
+  .shell-b { --orbit-size: 220px; }
+  .shell-c { --orbit-size: 194px; }
+  .shell-d { --orbit-size: 168px; }
+  .shell-e { --orbit-size: 146px; }
+  .shell-f { --orbit-size: 126px; }
 }
 
 @media (max-width: 767px) {
@@ -710,8 +754,20 @@ a:hover { text-decoration: underline; }
   .repo-desc { min-height: 0; }
   .cta-band { flex-direction: column; align-items: flex-start; }
   .orbit-panel { min-height: 210px; }
-  .orbit-node { font-size: 0.7rem; padding: 0.3rem 0.58rem; }
-  .orbit-core { width: 88px; height: 88px; }
+  .orbit-core { width: 84px; height: 84px; }
+  .orbit-core span { font-size: 0.64rem; }
+  .nucleus-pulse { width: 102px; height: 102px; }
+  .orbit-electron > span {
+    min-width: 64px;
+    font-size: 0.6rem;
+    padding: 0.22rem 0.42rem;
+  }
+  .shell-a { --orbit-size: 206px; }
+  .shell-b { --orbit-size: 188px; }
+  .shell-c { --orbit-size: 168px; }
+  .shell-d { --orbit-size: 146px; }
+  .shell-e { --orbit-size: 126px; }
+  .shell-f { --orbit-size: 110px; }
   .meta-grid > div { min-height: 0; }
   .meta-action-row { justify-content: flex-start; }
   .about-highlight-card { padding: 0.64rem; }

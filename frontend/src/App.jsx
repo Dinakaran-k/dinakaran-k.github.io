@@ -382,16 +382,30 @@ export default function App() {
             </div>
             <div className="col-lg-5">
               <div className="orbit-panel">
-                <div className="orbit-ring ring-one" />
-                <div className="orbit-ring ring-two" />
                 <div className="orbit-core">
                   <FaAndroid />
-                  <span>Mobile Stack</span>
+                  <span>Mobile</span>
                 </div>
-                <div className="orbit-node n1"><FaAndroid /> Kotlin</div>
-                <div className="orbit-node n2"><FaBolt /> Flutter</div>
-                <div className="orbit-node n3"><FaTerminal /> MVVM</div>
-                <div className="orbit-node n4"><FaFire /> Crashlytics</div>
+                <div className="nucleus-pulse" />
+
+                <div className="orbit-shell shell-a">
+                  <div className="orbit-electron e1"><span><FaAndroid /> Native Android</span></div>
+                </div>
+                <div className="orbit-shell shell-b">
+                  <div className="orbit-electron e2"><span><FaBolt /> Flutter</span></div>
+                </div>
+                <div className="orbit-shell shell-c">
+                  <div className="orbit-electron e3"><span><FaTerminal /> KMP</span></div>
+                </div>
+                <div className="orbit-shell shell-d">
+                  <div className="orbit-electron e4"><span><FaFire /> Flutter CMP</span></div>
+                </div>
+                <div className="orbit-shell shell-e">
+                  <div className="orbit-electron e5"><span>Kotlin</span></div>
+                </div>
+                <div className="orbit-shell shell-f">
+                  <div className="orbit-electron e6"><span>Java</span></div>
+                </div>
               </div>
             </div>
           </div>
