@@ -424,8 +424,8 @@ a:hover { text-decoration: underline; }
   background: color-mix(in oklab, var(--card) 96%, transparent);
 }
 
-.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
-.reveal.in-view { opacity: 1; transform: none; }
+.reveal { opacity: 1; transform: none; }
+.reveal.in-view { animation: fadeLift 0.58s ease both; }
 
 .github-card a,
 .project-card a,
@@ -435,6 +435,10 @@ a:hover { text-decoration: underline; }
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes fadeLift {
+  from { opacity: 0.72; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 @media (max-width: 991px) {
   .orbit-panel { min-height: 170px; }
@@ -447,7 +451,11 @@ a:hover { text-decoration: underline; }
 @media (max-width: 767px) {
   .brand-name { font-size: 0.82rem; max-width: 160px; overflow: hidden; text-overflow: ellipsis; }
   .brand-dot { display: none; }
+  .hero-wrap { padding-bottom: 2rem !important; }
   .hero-title { font-size: 2rem; }
+  .hero-copy { font-size: 0.95rem; line-height: 1.5; }
+  .stat-row { grid-template-columns: 1fr; }
+  .ticker-item { padding: 0.58rem 0.78rem; font-size: 0.76rem; }
   .repo-desc { min-height: 0; }
   .cta-band { flex-direction: column; align-items: flex-start; }
   .bubble { font-size: 0.7rem; padding: 0.3rem 0.58rem; }

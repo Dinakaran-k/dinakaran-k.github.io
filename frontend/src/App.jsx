@@ -210,11 +210,16 @@ export default function App() {
           if (entry.isIntersecting) entry.target.classList.add("in-view");
         });
       },
-      { threshold: 0.14 }
+      { threshold: 0.05, rootMargin: "0px 0px -8% 0px" }
     );
 
     const elements = document.querySelectorAll(".reveal");
-    elements.forEach((el) => observer.observe(el));
+    elements.forEach((el) => {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+        el.classList.add("in-view");
+      }
+      observer.observe(el);
+    });
     return () => observer.disconnect();
   }, []);
 
