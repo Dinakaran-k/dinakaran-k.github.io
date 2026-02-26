@@ -363,7 +363,7 @@ export default function App() {
           </div>
         </nav>
 
-        <div className="container pt-4 pt-md-5 reveal in-view">
+        <div className="container pt-4 pt-md-5 reveal in-view hero-stage">
           <div className="row g-4 align-items-center">
             <div className="col-lg-7">
               <div className="hero-pill mb-3"><FaFire /> {profile.headline}</div>
@@ -417,6 +417,9 @@ export default function App() {
               ))}
             </div>
           </div>
+          <span className="hero-deco deco-a" />
+          <span className="hero-deco deco-b" />
+          <span className="hero-deco deco-c" />
         </div>
       </header>
 

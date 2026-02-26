@@ -3,6 +3,7 @@
 :root {
   --bg: #070c16;
   --bg-soft: #111a2d;
+  --bg-softer: #15223a;
   --text: #eaf0ff;
   --muted: #a8b7d8;
   --line: rgba(173, 195, 243, 0.2);
@@ -37,6 +38,7 @@ body {
   font-family: "Sora", sans-serif;
   color: var(--text);
   background:
+    radial-gradient(56rem 30rem at 50% 130%, rgba(167, 139, 250, 0.12), transparent 68%),
     radial-gradient(70rem 26rem at 10% -8%, rgba(56, 189, 248, 0.26), transparent 55%),
     radial-gradient(50rem 24rem at 90% -12%, rgba(65, 226, 155, 0.2), transparent 60%),
     var(--bg);
@@ -97,6 +99,39 @@ a:hover { text-decoration: underline; }
 .hero-glow-c { width: 210px; height: 210px; background: rgba(249, 115, 22, 0.14); left: 44%; top: 68%; animation-delay: -4s; }
 
 .hero-wrap { border-bottom: 1px solid var(--line); }
+.hero-stage { position: relative; }
+.hero-deco {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.55;
+  filter: blur(1px);
+  animation: decoDrift 9s ease-in-out infinite;
+}
+.deco-a {
+  width: 14px;
+  height: 14px;
+  right: 4%;
+  top: 18%;
+  background: radial-gradient(circle at 30% 30%, #7dd3fc, #0ea5e9);
+}
+.deco-b {
+  width: 10px;
+  height: 10px;
+  right: 28%;
+  top: 64%;
+  background: radial-gradient(circle at 30% 30%, #86efac, #22c55e);
+  animation-delay: -2.4s;
+}
+.deco-c {
+  width: 8px;
+  height: 8px;
+  right: 12%;
+  top: 82%;
+  background: radial-gradient(circle at 30% 30%, #c4b5fd, #8b5cf6);
+  animation-delay: -4.6s;
+}
 
 .nav-blur {
   backdrop-filter: blur(12px);
@@ -182,6 +217,10 @@ a:hover { text-decoration: underline; }
   line-height: 1.05;
   font-weight: 800;
   max-width: 15ch;
+  background: linear-gradient(95deg, #f8fbff 10%, #b9d4ff 54%, #9be9ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .hero-copy {
@@ -217,6 +256,18 @@ a:hover { text-decoration: underline; }
   background: linear-gradient(155deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--bg-soft) 90%, var(--brand-3) 10%));
   padding: 0.85rem 0.95rem;
   box-shadow: var(--card-shadow);
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.85), rgba(65, 226, 155, 0.8), rgba(167, 139, 250, 0.85));
 }
 
 .stat-card span { display: block; font-weight: 700; font-size: 1rem; }
@@ -233,6 +284,12 @@ a:hover { text-decoration: underline; }
     linear-gradient(145deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--bg-soft) 88%, var(--brand-2) 12%));
   overflow: hidden;
   box-shadow: var(--card-shadow);
+  transform: perspective(1000px) rotateX(2deg) rotateY(-2deg);
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+.orbit-panel:hover {
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(-3px);
+  box-shadow: 0 24px 45px rgba(8, 24, 56, 0.34);
 }
 
 .orbit-panel::before {
@@ -379,7 +436,24 @@ a:hover { text-decoration: underline; }
 }
 
 .section-shell { border-bottom: 1px solid var(--line); }
+.section-shell:nth-of-type(odd) {
+  background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--bg-softer) 28%, transparent));
+}
 .section-title { font-size: clamp(1.5rem, 2.2vw, 2.25rem); font-weight: 760; margin-bottom: 0.35rem; }
+.section-title {
+  position: relative;
+  display: inline-block;
+}
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  width: 64px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand-2), var(--brand), var(--brand-3));
+}
 .section-subtitle { color: var(--muted); max-width: 68ch; }
 .section-minor { color: var(--muted); }
 
@@ -392,6 +466,7 @@ a:hover { text-decoration: underline; }
   border-radius: 0.65rem;
   border: 1px solid var(--line);
   background: linear-gradient(130deg, rgba(56, 189, 248, 0.18), rgba(65, 226, 155, 0.16));
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 8px 22px rgba(2, 10, 24, 0.24);
 }
 
 .glass-card {
@@ -400,6 +475,7 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--line);
   border-radius: 1rem;
   background: var(--card);
+  backdrop-filter: blur(8px);
   padding: 1.05rem;
   box-shadow: var(--card-shadow);
   transition: transform 0.35s ease, border-color 0.35s ease;
@@ -466,12 +542,13 @@ a:hover { text-decoration: underline; }
   border-radius: 0.85rem;
   padding: 0.72rem 0.72rem;
   background: linear-gradient(145deg, color-mix(in oklab, var(--bg-soft) 84%, var(--brand-2) 16%), color-mix(in oklab, var(--bg-soft) 88%, var(--brand-3) 12%));
-  transition: transform 0.28s ease, border-color 0.28s ease;
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
 }
 
 .about-highlight-card:hover {
   transform: translateY(-3px);
   border-color: color-mix(in oklab, var(--brand-2) 40%, var(--line));
+  box-shadow: 0 14px 28px rgba(8, 24, 56, 0.24);
 }
 
 .about-highlight-icon {
@@ -613,6 +690,11 @@ a:hover { text-decoration: underline; }
   padding: 0.28rem 0.56rem;
   font-size: 0.76rem;
   background: linear-gradient(130deg, color-mix(in oklab, var(--bg-soft) 86%, var(--brand-2) 14%), color-mix(in oklab, var(--bg-soft) 88%, var(--brand-3) 12%));
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.skill-pill:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--brand-2) 50%, var(--line));
 }
 
 .project-card,
@@ -722,6 +804,10 @@ a:hover { text-decoration: underline; }
   0%, 100% { transform: translate(-50%, -50%) scale(0.96); opacity: 0.52; }
   50% { transform: translate(-50%, -50%) scale(1.04); opacity: 0.88; }
 }
+@keyframes decoDrift {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.5; }
+  50% { transform: translateY(-8px) scale(1.08); opacity: 0.9; }
+}
 
 @media (max-width: 991px) {
   .orbit-panel { min-height: 185px; }
@@ -741,6 +827,7 @@ a:hover { text-decoration: underline; }
   .shell-d { --orbit-size: 168px; }
   .shell-e { --orbit-size: 146px; }
   .shell-f { --orbit-size: 126px; }
+  .hero-deco { display: none; }
 }
 
 @media (max-width: 767px) {
