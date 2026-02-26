@@ -431,7 +431,9 @@ a:hover { text-decoration: underline; }
 .meta-value {
   color: var(--text);
   line-height: 1.35;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
 .meta-action-row {
@@ -439,13 +441,21 @@ a:hover { text-decoration: underline; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.55rem;
   min-width: 0;
 }
 
 .meta-action-row .meta-value {
   flex: 1;
   min-width: 0;
+}
+
+.meta-ellipsis {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .icon-only-link {

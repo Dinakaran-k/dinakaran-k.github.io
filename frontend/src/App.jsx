@@ -423,28 +423,28 @@ export default function App() {
               </div>
 
               <div className="row g-3 meta-grid">
-                <div className="col-md-6 col-xl-3">
+                <div className="col-sm-6">
                   <strong><FaLocationDot /> Location</strong>
                   <div className="meta-value">{profile.location}</div>
                 </div>
-                <div className="col-md-6 col-xl-3">
+                <div className="col-sm-6">
                   <strong><FaEnvelope /> Email</strong><br />
                   <div className="meta-action-row">
-                    <span className="meta-value">{profile.email}</span>
+                    <span className="meta-value meta-ellipsis" title={profile.email}>{profile.email}</span>
                     <a className="contact-link icon-only-link" href={`mailto:${profile.email}`} aria-label="Send email" title="Send email"><FaEnvelope /></a>
                   </div>
                 </div>
-                <div className="col-md-6 col-xl-3">
+                <div className="col-sm-6">
                   <strong><FaPhone /> Mobile</strong><br />
                   <div className="meta-action-row">
                     <span className="meta-value">{profile.phone}</span>
                     <a className="contact-link icon-only-link" href={`tel:${profile.phone.replace(/\s+/g, "")}`} aria-label="Call mobile number" title="Call"><FaPhone /></a>
                   </div>
                 </div>
-                <div className="col-md-6 col-xl-3">
+                <div className="col-sm-6">
                   <strong><FaLinkedin /> LinkedIn</strong>
                   <div className="meta-action-row">
-                    <span className="meta-value">dinakarankommunuri</span>
+                    <span className="meta-value meta-ellipsis" title="dinakarankommunuri">dinakarankommunuri</span>
                     <a className="contact-link icon-only-link" href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="Open LinkedIn profile" title="LinkedIn"><FaArrowUpRightFromSquare /></a>
                   </div>
                 </div>
