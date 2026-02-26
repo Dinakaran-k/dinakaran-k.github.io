@@ -8,7 +8,10 @@
   --line: rgba(173, 195, 243, 0.2);
   --brand: #41e29b;
   --brand-2: #38bdf8;
+  --brand-3: #a78bfa;
   --card: rgba(14, 22, 40, 0.78);
+  --card-shadow: 0 14px 34px rgba(2, 8, 28, 0.16);
+  --card-shadow-hover: 0 20px 42px rgba(8, 24, 56, 0.28);
 }
 
 [data-bs-theme="light"] {
@@ -19,7 +22,10 @@
   --line: rgba(38, 60, 104, 0.2);
   --brand: #2563eb;
   --brand-2: #0ea5e9;
+  --brand-3: #7c3aed;
   --card: rgba(255, 255, 255, 0.92);
+  --card-shadow: 0 14px 34px rgba(20, 58, 130, 0.12);
+  --card-shadow-hover: 0 20px 44px rgba(37, 99, 235, 0.2);
 }
 
 html,
@@ -41,6 +47,32 @@ a { color: var(--brand-2); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 .portfolio-root { position: relative; isolation: isolate; }
+.portfolio-root::before,
+.portfolio-root::after {
+  content: "";
+  position: fixed;
+  width: 260px;
+  height: 260px;
+  border-radius: 40% 60% 55% 45%;
+  filter: blur(42px);
+  opacity: 0.25;
+  z-index: -2;
+  pointer-events: none;
+  animation: morphFloat 12s ease-in-out infinite;
+}
+
+.portfolio-root::before {
+  background: linear-gradient(135deg, var(--brand-2), var(--brand-3));
+  left: -110px;
+  bottom: 12%;
+}
+
+.portfolio-root::after {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  right: -90px;
+  bottom: 6%;
+  animation-delay: -4s;
+}
 
 .hero-bg-grid {
   position: fixed;
@@ -127,8 +159,9 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 0.45rem 0.82rem;
-  background: linear-gradient(90deg, rgba(56, 189, 248, 0.24), rgba(65, 226, 155, 0.16));
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.24), rgba(65, 226, 155, 0.16), rgba(167, 139, 250, 0.18));
   font-size: 0.84rem;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
 .hero-title {
@@ -148,10 +181,12 @@ a:hover { text-decoration: underline; }
   display: inline-flex;
   align-items: center;
   gap: 0.42rem;
-  background: linear-gradient(100deg, var(--brand), var(--brand-2));
+  background: linear-gradient(100deg, var(--brand), var(--brand-2), var(--brand-3));
+  background-size: 200% 100%;
   color: #041018;
   border: 0;
   font-weight: 700;
+  animation: sheenMove 5s linear infinite;
 }
 
 .btn-accent:hover { filter: brightness(1.05); color: #041018; }
@@ -165,8 +200,9 @@ a:hover { text-decoration: underline; }
 .stat-card {
   border: 1px solid var(--line);
   border-radius: 1rem;
-  background: var(--card);
+  background: linear-gradient(155deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--bg-soft) 90%, var(--brand-3) 10%));
   padding: 0.85rem 0.95rem;
+  box-shadow: var(--card-shadow);
 }
 
 .stat-card span { display: block; font-weight: 700; font-size: 1rem; }
@@ -177,8 +213,9 @@ a:hover { text-decoration: underline; }
   position: relative;
   border: 1px solid var(--line);
   border-radius: 1.1rem;
-  background: linear-gradient(145deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--bg-soft) 92%, var(--brand-2) 8%));
+  background: linear-gradient(145deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--bg-soft) 88%, var(--brand-2) 12%));
   overflow: hidden;
+  box-shadow: var(--card-shadow);
 }
 
 .orbit-panel::before {
@@ -266,7 +303,7 @@ a:hover { text-decoration: underline; }
   border-radius: 1rem;
   background: var(--card);
   padding: 1.05rem;
-  box-shadow: 0 14px 34px rgba(2, 8, 28, 0.16);
+  box-shadow: var(--card-shadow);
   transition: transform 0.35s ease, border-color 0.35s ease;
 }
 
@@ -296,6 +333,7 @@ a:hover { text-decoration: underline; }
 .glass-card:hover {
   transform: translateY(-3px);
   border-color: color-mix(in oklab, var(--brand-2) 38%, var(--line));
+  box-shadow: var(--card-shadow-hover);
 }
 
 .glass-card:hover::before { opacity: 1; }
@@ -329,7 +367,7 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--line);
   border-radius: 0.85rem;
   padding: 0.72rem 0.72rem;
-  background: color-mix(in oklab, var(--bg-soft) 86%, var(--brand-2) 14%);
+  background: linear-gradient(145deg, color-mix(in oklab, var(--bg-soft) 84%, var(--brand-2) 16%), color-mix(in oklab, var(--bg-soft) 88%, var(--brand-3) 12%));
   transition: transform 0.28s ease, border-color 0.28s ease;
 }
 
@@ -423,7 +461,7 @@ a:hover { text-decoration: underline; }
   border-radius: 999px;
   padding: 0.28rem 0.56rem;
   font-size: 0.76rem;
-  background: color-mix(in oklab, var(--bg-soft) 84%, var(--brand-2) 16%);
+  background: linear-gradient(130deg, color-mix(in oklab, var(--bg-soft) 86%, var(--brand-2) 14%), color-mix(in oklab, var(--bg-soft) 88%, var(--brand-3) 12%));
 }
 
 .project-card,
@@ -432,9 +470,10 @@ a:hover { text-decoration: underline; }
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 1rem;
-  background: linear-gradient(150deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--bg-soft) 92%, var(--brand-2) 8%));
+  background: linear-gradient(150deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--bg-soft) 87%, var(--brand-2) 13%));
   padding: 1rem;
   transition: transform 0.32s ease, border-color 0.32s ease, box-shadow 0.32s ease;
+  box-shadow: var(--card-shadow);
 }
 
 .project-card::before,
@@ -452,7 +491,7 @@ a:hover { text-decoration: underline; }
 .github-card:hover {
   transform: translateY(-6px);
   border-color: color-mix(in oklab, var(--brand) 36%, var(--line));
-  box-shadow: 0 14px 28px rgba(12, 36, 88, 0.2);
+  box-shadow: var(--card-shadow-hover);
 }
 
 .project-card:hover::before,
@@ -477,7 +516,7 @@ a:hover { text-decoration: underline; }
 .cta-band {
   border: 1px solid var(--line);
   border-radius: 1rem;
-  background: linear-gradient(100deg, rgba(56, 189, 248, 0.14), rgba(65, 226, 155, 0.14));
+  background: linear-gradient(100deg, rgba(56, 189, 248, 0.16), rgba(65, 226, 155, 0.14), rgba(167, 139, 250, 0.14));
   padding: 1.2rem;
   display: flex;
   justify-content: space-between;
@@ -514,6 +553,14 @@ a:hover { text-decoration: underline; }
   from { opacity: 0.72; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
+@keyframes sheenMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+@keyframes morphFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); border-radius: 40% 60% 55% 45%; }
+  50% { transform: translateY(-14px) rotate(10deg); border-radius: 58% 42% 40% 60%; }
+}
 
 @media (max-width: 991px) {
   .orbit-panel { min-height: 170px; }
@@ -536,4 +583,6 @@ a:hover { text-decoration: underline; }
   .bubble { font-size: 0.7rem; padding: 0.3rem 0.58rem; }
   .meta-grid > div { min-height: 0; }
   .about-highlight-card { padding: 0.64rem; }
+  .portfolio-root::before,
+  .portfolio-root::after { display: none; }
 }
