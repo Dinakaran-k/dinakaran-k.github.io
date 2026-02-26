@@ -274,7 +274,7 @@ a:hover { text-decoration: underline; }
 .stat-card small { color: var(--muted); }
 
 .orbit-panel {
-  min-height: 230px;
+  min-height: 360px;
   position: relative;
   border: 1px solid var(--line);
   border-radius: 1.1rem;
@@ -307,8 +307,8 @@ a:hover { text-decoration: underline; }
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 104px;
-  height: 104px;
+  width: 132px;
+  height: 132px;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -327,7 +327,7 @@ a:hover { text-decoration: underline; }
 }
 
 .orbit-core span {
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   letter-spacing: 0.02em;
   color: var(--text);
 }
@@ -336,8 +336,8 @@ a:hover { text-decoration: underline; }
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 132px;
-  height: 132px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid color-mix(in oklab, var(--brand-2) 40%, var(--line));
@@ -352,7 +352,7 @@ a:hover { text-decoration: underline; }
   top: 50%;
   width: var(--orbit-size);
   height: var(--orbit-size);
-  transform: translate(-50%, -50%) rotate(var(--tilt));
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   border: 1px dashed color-mix(in oklab, var(--brand-2) 52%, var(--line));
   animation: shellSpin var(--duration) linear infinite;
@@ -377,8 +377,8 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 0.32rem 0.64rem;
-  min-width: 86px;
-  font-size: 0.72rem;
+  min-width: 112px;
+  font-size: 0.82rem;
   font-weight: 600;
   background: color-mix(in oklab, var(--bg-soft) 78%, var(--brand-2) 22%);
   color: var(--text);
@@ -387,19 +387,19 @@ a:hover { text-decoration: underline; }
   white-space: nowrap;
 }
 
-.shell-a { --orbit-size: 278px; --duration: 18s; --tilt: 22deg; }
-.shell-b { --orbit-size: 248px; --duration: 14s; --tilt: -26deg; }
-.shell-c { --orbit-size: 216px; --duration: 12.5s; --tilt: 64deg; }
-.shell-d { --orbit-size: 184px; --duration: 11s; --tilt: -58deg; }
-.shell-e { --orbit-size: 160px; --duration: 9s; --tilt: 0deg; }
-.shell-f { --orbit-size: 138px; --duration: 7.5s; --tilt: 38deg; }
+.shell-a { --orbit-size: 344px; --duration: 28s; }
+.shell-b { --orbit-size: 300px; --duration: 23s; }
+.shell-c { --orbit-size: 256px; --duration: 19s; }
+.shell-d { --orbit-size: 216px; --duration: 16s; }
+.shell-e { --orbit-size: 182px; --duration: 13s; }
+.shell-f { --orbit-size: 152px; --duration: 11s; }
 
-.e1 { --start: 16deg; }
-.e2 { --start: 128deg; }
-.e3 { --start: 234deg; }
-.e4 { --start: 308deg; }
-.e5 { --start: 204deg; }
-.e6 { --start: 24deg; }
+.e1 { --start: 8deg; }
+.e2 { --start: 74deg; }
+.e3 { --start: 154deg; }
+.e4 { --start: 220deg; }
+.e5 { --start: 294deg; }
+.e6 { --start: 338deg; }
 
 .ticker-wrap {
   position: relative;
@@ -782,7 +782,7 @@ a:hover { text-decoration: underline; }
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes shellSpin { from { transform: translate(-50%, -50%) rotate(var(--tilt)); } to { transform: translate(-50%, -50%) rotate(calc(var(--tilt) + 360deg)); } }
+@keyframes shellSpin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 @keyframes shellCounter { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(-360deg); } }
 @keyframes fadeLift {
   from { opacity: 0.72; transform: translateY(12px); }
@@ -810,23 +810,24 @@ a:hover { text-decoration: underline; }
 }
 
 @media (max-width: 991px) {
-  .orbit-panel { min-height: 185px; }
+  .orbit-panel { min-height: 300px; }
   .orbit-core {
-    width: 90px;
-    height: 90px;
+    width: 114px;
+    height: 114px;
   }
-  .nucleus-pulse { width: 112px; height: 112px; }
+  .orbit-core span { font-size: 0.8rem; }
+  .nucleus-pulse { width: 146px; height: 146px; }
   .orbit-electron > span {
-    min-width: 72px;
-    font-size: 0.66rem;
-    padding: 0.26rem 0.48rem;
+    min-width: 98px;
+    font-size: 0.74rem;
+    padding: 0.26rem 0.52rem;
   }
-  .shell-a { --orbit-size: 240px; }
-  .shell-b { --orbit-size: 220px; }
-  .shell-c { --orbit-size: 194px; }
-  .shell-d { --orbit-size: 168px; }
-  .shell-e { --orbit-size: 146px; }
-  .shell-f { --orbit-size: 126px; }
+  .shell-a { --orbit-size: 292px; }
+  .shell-b { --orbit-size: 260px; }
+  .shell-c { --orbit-size: 226px; }
+  .shell-d { --orbit-size: 194px; }
+  .shell-e { --orbit-size: 164px; }
+  .shell-f { --orbit-size: 136px; }
   .hero-deco { display: none; }
 }
 
@@ -840,21 +841,23 @@ a:hover { text-decoration: underline; }
   .ticker-item { padding: 0.58rem 0.78rem; font-size: 0.76rem; }
   .repo-desc { min-height: 0; }
   .cta-band { flex-direction: column; align-items: flex-start; }
-  .orbit-panel { min-height: 210px; }
-  .orbit-core { width: 84px; height: 84px; }
-  .orbit-core span { font-size: 0.64rem; }
-  .nucleus-pulse { width: 102px; height: 102px; }
+  .orbit-panel { min-height: 250px; }
+  .orbit-core { width: 96px; height: 96px; }
+  .orbit-core span { font-size: 0.72rem; }
+  .nucleus-pulse { width: 122px; height: 122px; }
   .orbit-electron > span {
-    min-width: 64px;
-    font-size: 0.6rem;
+    min-width: 88px;
+    font-size: 0.68rem;
     padding: 0.22rem 0.42rem;
   }
-  .shell-a { --orbit-size: 206px; }
-  .shell-b { --orbit-size: 188px; }
-  .shell-c { --orbit-size: 168px; }
-  .shell-d { --orbit-size: 146px; }
-  .shell-e { --orbit-size: 126px; }
-  .shell-f { --orbit-size: 110px; }
+  .shell-a { --orbit-size: 230px; }
+  .shell-b { --orbit-size: 204px; }
+  .shell-c { --orbit-size: 178px; }
+  .shell-d { --orbit-size: 154px; }
+  .shell-e { --orbit-size: 130px; }
+  .shell-f { --orbit-size: 108px; }
+  .shell-e,
+  .shell-f { display: none; }
   .meta-grid > div { min-height: 0; }
   .meta-action-row { justify-content: flex-start; }
   .about-highlight-card { padding: 0.64rem; }

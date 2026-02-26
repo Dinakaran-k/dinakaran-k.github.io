@@ -365,7 +365,7 @@ export default function App() {
 
         <div className="container pt-4 pt-md-5 reveal in-view hero-stage">
           <div className="row g-4 align-items-center">
-            <div className="col-lg-7">
+            <div className="col-lg-6">
               <div className="hero-pill mb-3"><FaFire /> {profile.headline}</div>
               <h1 className="hero-title mb-3">{profile.role}</h1>
               <p className="hero-copy mb-4">{profile.heroIntro}</p>
@@ -380,7 +380,7 @@ export default function App() {
                 <div className="stat-card"><span>30%</span><small>Crash-rate Reduction</small></div>
               </div>
             </div>
-            <div className="col-lg-5">
+            <div className="col-lg-6">
               <div className="orbit-panel">
                 <div className="orbit-core">
                   <FaAndroid />
