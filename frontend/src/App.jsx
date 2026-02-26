@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+ï»¿import { useEffect, useMemo, useState } from "react";
 import {
   FaAndroid,
   FaArrowRight,
@@ -94,7 +94,7 @@ const notableAchievements = [
   "Recognized for writing clean, well-documented code that helped onboard new developers efficiently."
 ];
 
-const freelanceProjects = [
+const clientProjects = [
   {
     title: "Turito - Live Learning App (Yupp TV Client)",
     duration: "May 2025 - Jan 2026",
@@ -280,7 +280,7 @@ export default function App() {
       <header id="top" className="hero-wrap pb-5">
         <nav className="navbar navbar-expand-lg py-3 sticky-top nav-blur">
           <div className="container">
-            <a className="navbar-brand fw-semibold brand-mark" href="#top">{profile.name}</a>
+            <a className="navbar-brand fw-semibold brand-mark d-flex align-items-center gap-2" href="#top" aria-label="Go to top"><span className="brand-glyph"><FaAndroid /></span><span className="brand-dot" /></a>
             <div className="d-flex align-items-center gap-2">
               <a className="btn btn-sm btn-outline-light nav-chip d-none d-md-inline" href="#projects"><FaCodeBranch /> Projects</a>
               <a className="btn btn-sm btn-outline-light nav-chip d-none d-md-inline" href="#contact"><FaUserTie /> Hire Me</a>
@@ -299,8 +299,8 @@ export default function App() {
               <p className="hero-copy mb-4">{profile.summary}</p>
               <div className="d-flex flex-wrap gap-3 mb-4">
                 <a className="btn btn-lg btn-accent" href="#contact"><FaWandMagicSparkles /> Open To Work</a>
-                <a className="btn btn-lg btn-outline-light" href={resumeUrl} download><FaArrowRight /> Download Resume</a>
-                <a className="btn btn-lg btn-outline-light" href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer"><FaGithub /> GitHub</a>
+                <a className="btn btn-lg btn-ghost" href={resumeUrl} download><FaArrowRight /> Download Resume</a>
+                <a className="btn btn-lg btn-ghost" href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer"><FaGithub /> GitHub</a>
               </div>
               <div className="stat-row">
                 <div className="stat-card"><span>4 Years</span><small>Mobile App Engineering</small></div>
@@ -387,16 +387,16 @@ export default function App() {
         </div>
       </Section>
 
-      <Section id="projects" title="Projects" icon={<FaCodeBranch />} subtitle="Freelance/client projects from resume plus live GitHub repositories.">
-        <h3 className="h5 mb-3">Freelance & Client Projects</h3>
+      <Section id="projects" title="Projects" icon={<FaCodeBranch />} subtitle="Client projects from resume plus live GitHub repositories.">
+        <h3 className="h5 mb-3">Client Projects</h3>
         <div className="row g-3 mb-5">
-          {freelanceProjects.map((proj) => (
+          {clientProjects.map((proj) => (
             <div className="col-lg-6" key={proj.title}>
               <article className="project-card h-100">
                 <p className="section-minor mb-2">{proj.duration}</p>
                 <h4 className="h6 mb-2">{proj.title}</h4>
                 <p className="project-impact"><FaFire /> {proj.impact}</p>
-                <small className="d-block mb-3 section-minor">{proj.technologies.join(" • ")}</small>
+                <small className="d-block mb-3 section-minor">{proj.technologies.join(", ")}</small>
                 <a href={proj.playStoreUrl} target="_blank" rel="noreferrer"><FaGooglePlay /> Open Play Store</a>
               </article>
             </div>
@@ -421,7 +421,7 @@ export default function App() {
                     {repo.isAndroid && <span className="badge text-bg-success"><FaAndroid /> Android</span>}
                   </div>
                   <p className="small mb-3 repo-desc">{repo.description}</p>
-                  <small className="d-block section-minor mb-2">{repo.language} • <FaRegStar /> {repo.stars}</small>
+                  <small className="d-block section-minor mb-2">{repo.language} | <FaRegStar /> {repo.stars}</small>
                   <small className="d-block section-minor mb-3">Updated {repo.updated}</small>
                   <a href={repo.repoUrl} target="_blank" rel="noreferrer"><FaGithub /> Open Repository</a>
                 </article>
@@ -477,10 +477,12 @@ export default function App() {
 
       <footer className="py-4 text-center section-minor">
         <div className="container small">
-          <p className="mb-1">{profile.name} • Android & Flutter Developer</p>
+          <p className="mb-1">{profile.name} | Android & Flutter Developer</p>
           <p className="mb-0">Freelancer | Open to New Opportunities</p>
         </div>
       </footer>
     </div>
   );
 }
+
+

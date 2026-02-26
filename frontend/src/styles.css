@@ -73,6 +73,23 @@ a:hover { text-decoration: underline; }
 }
 
 .brand-mark { color: var(--text) !important; letter-spacing: 0.01em; }
+.brand-glyph {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: linear-gradient(145deg, rgba(56, 189, 248, 0.2), rgba(65, 226, 155, 0.16));
+}
+.brand-dot {
+  width: 0.46rem;
+  height: 0.46rem;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 12px color-mix(in oklab, var(--brand) 70%, transparent);
+}
 
 .nav-chip {
   display: inline-flex;
@@ -80,6 +97,22 @@ a:hover { text-decoration: underline; }
   gap: 0.35rem;
   border-color: var(--line) !important;
   color: var(--text) !important;
+  background: color-mix(in oklab, var(--card) 86%, transparent) !important;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  border: 1px solid var(--line);
+  background: color-mix(in oklab, var(--card) 82%, transparent);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  border-color: color-mix(in oklab, var(--brand-2) 40%, var(--line));
+  color: var(--text);
+  text-decoration: none;
 }
 
 .hero-pill {
