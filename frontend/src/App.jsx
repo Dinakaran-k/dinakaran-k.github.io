@@ -255,6 +255,37 @@ export default function App() {
     loadGithubProjects();
   }, []);
 
+  useEffect(() => {
+    if (!window.matchMedia("(hover: hover)").matches) return;
+
+    const cards = document.querySelectorAll(".project-card, .github-card, .glass-card");
+    const handlers = [];
+
+    cards.forEach((card) => {
+      const move = (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        card.style.setProperty("--mx", `${x}px`);
+        card.style.setProperty("--my", `${y}px`);
+      };
+      const leave = () => {
+        card.style.setProperty("--mx", "50%");
+        card.style.setProperty("--my", "50%");
+      };
+      card.addEventListener("pointermove", move);
+      card.addEventListener("pointerleave", leave);
+      handlers.push({ card, move, leave });
+    });
+
+    return () => {
+      handlers.forEach(({ card, move, leave }) => {
+        card.removeEventListener("pointermove", move);
+        card.removeEventListener("pointerleave", leave);
+      });
+    };
+  }, []);
+
   const groupedSkills = useMemo(() => Object.entries(skills), []);
 
   function handleContactSubmit(event) {
@@ -281,7 +312,11 @@ export default function App() {
       <header id="top" className="hero-wrap pb-5">
         <nav className="navbar navbar-expand-lg py-3 sticky-top nav-blur">
           <div className="container">
-            <a className="navbar-brand fw-semibold brand-mark d-flex align-items-center gap-2" href="#top" aria-label="Go to top"><span className="brand-glyph"><FaAndroid /></span><span className="brand-dot" /></a>
+            <a className="navbar-brand fw-semibold brand-mark d-flex align-items-center gap-2" href="#top" aria-label="Go to top">
+              <span className="brand-glyph"><FaAndroid /></span>
+              <span className="brand-name">{profile.name}</span>
+              <span className="brand-dot" />
+            </a>
             <div className="d-flex align-items-center gap-2">
               <a className="btn btn-sm btn-outline-light nav-chip d-none d-md-inline" href="#projects"><FaCodeBranch /> Projects</a>
               <a className="btn btn-sm btn-outline-light nav-chip d-none d-md-inline" href="#contact"><FaUserTie /> Hire Me</a>
@@ -344,10 +379,7 @@ export default function App() {
                   <strong><FaPhone /> Mobile</strong><br />
                   <a className="contact-link" href={`tel:${profile.phone.replace(/\s+/g, "")}`}>{profile.phone}</a>
                 </div>
-                <div className="col-sm-6 col-lg-3">
-                  <strong><FaGithub /> GitHub</strong><br />
-                  <a className="contact-link" href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer">{profile.githubUsername}</a>
-                </div>
+                <div className="col-sm-6 col-lg-3"><strong><FaLinkedin /> LinkedIn</strong><br /><a className="contact-link" href={profile.linkedin} target="_blank" rel="noreferrer">dinakarankommunuri</a></div>
               </div>
             </div>
           </div>
@@ -481,7 +513,6 @@ export default function App() {
           <div className="col-12 d-flex flex-wrap align-items-center gap-3">
             <button className="btn btn-accent btn-lg" type="submit"><FaEnvelope /> Send Message</button>
             <a href={profile.linkedin} target="_blank" rel="noreferrer"><FaLinkedin /> LinkedIn</a>
-            <a href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer"><FaGithub /> GitHub</a>
           </div>
         </form>
       </Section>
