@@ -86,6 +86,15 @@ a:hover {
   animation-delay: -2.3s;
 }
 
+.hero-glow-c {
+  width: 220px;
+  height: 220px;
+  background: rgba(249, 115, 22, 0.18);
+  left: 40%;
+  top: 70%;
+  animation-delay: -4s;
+}
+
 .hero-wrap {
   border-bottom: 1px solid var(--line);
 }
@@ -102,6 +111,9 @@ a:hover {
 }
 
 .nav-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   border-color: var(--line) !important;
   color: var(--text) !important;
 }
@@ -130,6 +142,9 @@ a:hover {
 }
 
 .btn-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   background: linear-gradient(100deg, var(--brand), var(--brand-2));
   color: #04131d;
   border: 0;
@@ -172,6 +187,17 @@ a:hover {
   font-size: clamp(1.5rem, 2.2vw, 2.3rem);
   font-weight: 750;
   margin-bottom: 0.35rem;
+}
+
+.section-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.14), rgba(74, 222, 128, 0.14));
 }
 
 .section-subtitle {
@@ -253,6 +279,9 @@ a:hover {
 }
 
 .project-impact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.75rem;
   color: var(--brand-2);
@@ -294,10 +323,98 @@ a:hover {
   transform: none;
 }
 
+.floating-tech {
+  position: relative;
+  height: 0;
+}
+
+.bubble {
+  position: absolute;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  background: color-mix(in oklab, var(--card) 85%, transparent);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  animation: bob 4.5s ease-in-out infinite;
+}
+
+.bubble.b1 { top: -14rem; right: 11rem; animation-delay: -0.3s; }
+.bubble.b2 { top: -10rem; right: 1rem; animation-delay: -1.2s; }
+.bubble.b3 { top: -6.2rem; right: 13rem; animation-delay: -2.1s; }
+.bubble.b4 { top: -3.4rem; right: 3rem; animation-delay: -3.2s; }
+
+.ticker-wrap {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--card) 88%, transparent);
+}
+
+.ticker-wrap::before,
+.ticker-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 70px;
+  height: 100%;
+  z-index: 1;
+}
+
+.ticker-wrap::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg), transparent);
+}
+
+.ticker-wrap::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg), transparent);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 24s linear infinite;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  padding: 0.7rem 1rem;
+  border-right: 1px solid var(--line);
+  white-space: nowrap;
+  font-size: 0.82rem;
+}
+
+.github-card a,
+.project-card a,
+.cta-band a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 @keyframes floatGlow {
   0%,
   100% { transform: translateY(0px); }
   50% { transform: translateY(-16px); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 @media (max-width: 767px) {

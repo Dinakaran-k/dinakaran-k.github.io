@@ -1,4 +1,26 @@
 import { useEffect, useMemo, useState } from "react";
+import {
+  FaAndroid,
+  FaArrowRight,
+  FaBolt,
+  FaBriefcase,
+  FaCodeBranch,
+  FaDatabase,
+  FaEnvelope,
+  FaFire,
+  FaGithub,
+  FaGooglePlay,
+  FaGraduationCap,
+  FaLinkedin,
+  FaLocationDot,
+  FaMobileScreen,
+  FaMoon,
+  FaRegStar,
+  FaSun,
+  FaTerminal,
+  FaUserTie,
+  FaWandMagicSparkles
+} from "react-icons/fa6";
 
 const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
 const GITHUB_USERNAME = import.meta.env.VITE_GITHUB_USERNAME || "Dinakaran-k";
@@ -57,6 +79,21 @@ const profile = {
   }
 };
 
+const skillTicker = [
+  "Kotlin",
+  "Jetpack Compose",
+  "Flutter",
+  "MVVM",
+  "Clean Architecture",
+  "Crashlytics",
+  "Retrofit",
+  "Hilt",
+  "Room",
+  "GraphQL",
+  "Performance Tuning",
+  "Play Store Release"
+];
+
 const freelanceProjects = [
   {
     title: "Turito - Live Learning App",
@@ -81,13 +118,16 @@ const freelanceProjects = [
   }
 ];
 
-function Section({ id, title, subtitle, children }) {
+function Section({ id, title, icon, subtitle, children }) {
   return (
     <section id={id} className="section-shell py-5 reveal">
       <div className="container">
-        <div className="mb-4">
-          <h2 className="section-title">{title}</h2>
-          {subtitle && <p className="section-subtitle mb-0">{subtitle}</p>}
+        <div className="mb-4 d-flex align-items-start gap-3">
+          <span className="section-icon">{icon}</span>
+          <div>
+            <h2 className="section-title">{title}</h2>
+            {subtitle && <p className="section-subtitle mb-0">{subtitle}</p>}
+          </div>
         </div>
         {children}
       </div>
@@ -218,6 +258,7 @@ export default function App() {
       <div className="hero-bg-grid" />
       <div className="hero-glow hero-glow-a" />
       <div className="hero-glow hero-glow-b" />
+      <div className="hero-glow hero-glow-c" />
 
       <header id="top" className="hero-wrap pb-5">
         <nav className="navbar navbar-expand-lg py-3 sticky-top nav-blur">
@@ -226,47 +267,61 @@ export default function App() {
               {profile.name}
             </a>
             <div className="d-flex align-items-center gap-2">
-              <a className="btn btn-sm btn-outline-light nav-chip d-none d-md-inline" href="#projects">Projects</a>
-              <a className="btn btn-sm btn-outline-light nav-chip d-none d-md-inline" href="#contact">Hire Me</a>
+              <a className="btn btn-sm btn-outline-light nav-chip d-none d-md-inline" href="#projects"><FaCodeBranch /> Projects</a>
+              <a className="btn btn-sm btn-outline-light nav-chip d-none d-md-inline" href="#contact"><FaUserTie /> Hire Me</a>
               <button className="btn btn-sm btn-outline-light nav-chip" onClick={() => setDarkMode((v) => !v)}>
-                {darkMode ? "Light" : "Dark"}
+                {darkMode ? <><FaSun /> Light</> : <><FaMoon /> Dark</>}
               </button>
             </div>
           </div>
         </nav>
 
         <div className="container pt-4 pt-md-5 reveal in-view">
-          <div className="hero-pill mb-3">{profile.headline}</div>
+          <div className="hero-pill mb-3"><FaFire /> {profile.headline}</div>
           <h1 className="hero-title mb-3">{profile.role}</h1>
           <p className="hero-copy mb-4">{profile.summary}</p>
+          <div className="floating-tech d-none d-lg-block">
+            <span className="bubble b1"><FaAndroid /> Kotlin</span>
+            <span className="bubble b2"><FaMobileScreen /> Compose</span>
+            <span className="bubble b3"><FaBolt /> Flutter</span>
+            <span className="bubble b4"><FaDatabase /> Room</span>
+          </div>
           <div className="d-flex flex-wrap gap-3 mb-4">
-            <a className="btn btn-lg btn-accent" href="#contact">Open To Work</a>
-            <a className="btn btn-lg btn-outline-light" href={resumeUrl} download>Download Resume</a>
-            <a className="btn btn-lg btn-outline-light" href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer">GitHub Profile</a>
+            <a className="btn btn-lg btn-accent" href="#contact"><FaWandMagicSparkles /> Open To Work</a>
+            <a className="btn btn-lg btn-outline-light" href={resumeUrl} download><FaArrowRight /> Download Resume</a>
+            <a className="btn btn-lg btn-outline-light" href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer"><FaGithub /> GitHub</a>
           </div>
           <div className="stat-row">
             <div className="stat-card"><span>4+ Years</span><small>Mobile Dev Experience</small></div>
             <div className="stat-card"><span>40+</span><small>Critical Bugs Resolved</small></div>
             <div className="stat-card"><span>Android + Flutter</span><small>Production Delivery</small></div>
           </div>
+
+          <div className="ticker-wrap mt-4">
+            <div className="ticker-track">
+              {[...skillTicker, ...skillTicker].map((item, idx) => (
+                <span key={`${item}-${idx}`} className="ticker-item"><FaTerminal /> {item}</span>
+              ))}
+            </div>
+          </div>
         </div>
       </header>
 
-      <Section id="about" title="About Me" subtitle="Focused on robust architecture, release quality, and user-first mobile experiences.">
+      <Section id="about" title="About Me" icon={<FaUserTie />} subtitle="Focused on robust architecture, release quality, and user-first mobile experiences.">
         <div className="row g-4 align-items-stretch">
           <div className="col-lg-7">
             <div className="glass-card h-100">
               <p className="mb-4">I build Android apps that stay stable in production and scale with product needs. My work combines architecture discipline with practical delivery under release pressure.</p>
               <div className="row g-3 text-body-secondary">
-                <div className="col-sm-4"><strong className="text-body">Location</strong><br />{profile.location}</div>
-                <div className="col-sm-4"><strong className="text-body">Email</strong><br />{profile.email}</div>
-                <div className="col-sm-4"><strong className="text-body">Phone</strong><br />{profile.phone}</div>
+                <div className="col-sm-4"><strong className="text-body"><FaLocationDot /> Location</strong><br />{profile.location}</div>
+                <div className="col-sm-4"><strong className="text-body"><FaEnvelope /> Email</strong><br />{profile.email}</div>
+                <div className="col-sm-4"><strong className="text-body"><FaMobileScreen /> Phone</strong><br />{profile.phone}</div>
               </div>
             </div>
           </div>
           <div className="col-lg-5">
             <div className="glass-card h-100">
-              <h3 className="h6 text-uppercase text-body-secondary mb-3">Education</h3>
+              <h3 className="h6 text-uppercase text-body-secondary mb-3"><FaGraduationCap /> Education</h3>
               {profile.education.map((edu) => (
                 <div key={edu.degree}>
                   <h4 className="h5 mb-1">{edu.degree}</h4>
@@ -280,7 +335,7 @@ export default function App() {
         </div>
       </Section>
 
-      <Section id="experience" title="Work Experience" subtitle="Recent roles and measurable impact across enterprise mobile products.">
+      <Section id="experience" title="Work Experience" icon={<FaBriefcase />} subtitle="Recent roles and measurable impact across enterprise mobile products.">
         <div className="timeline-wrap">
           {profile.experiences.map((exp) => (
             <article className="timeline-item" key={`${exp.company}-${exp.role}`}>
@@ -298,7 +353,7 @@ export default function App() {
         </div>
       </Section>
 
-      <Section id="skills" title="Skills" subtitle="Core stack grouped by how I architect and ship mobile applications.">
+      <Section id="skills" title="Skills" icon={<FaBolt />} subtitle="Core stack grouped by how I architect and ship mobile applications.">
         <div className="row g-3">
           {groupedSkills.map(([group, skillList]) => (
             <div className="col-lg-4 col-md-6" key={group}>
@@ -315,17 +370,17 @@ export default function App() {
         </div>
       </Section>
 
-      <Section id="projects" title="Projects" subtitle="Freelance projects from your resume + live GitHub repositories fetched in real time.">
+      <Section id="projects" title="Projects" icon={<FaCodeBranch />} subtitle="Freelance projects from your resume + live GitHub repositories fetched in real time.">
         <h3 className="h5 mb-3">Freelance & Client Work</h3>
         <div className="row g-3 mb-5">
           {freelanceProjects.map((proj) => (
             <div className="col-lg-4 col-md-6" key={proj.title}>
               <article className="project-card h-100">
-                <p className="project-impact">{proj.impact}</p>
+                <p className="project-impact"><FaFire /> {proj.impact}</p>
                 <h4 className="h6 mb-2">{proj.title}</h4>
                 <p className="mb-3">{proj.description}</p>
                 <small className="d-block mb-3 text-body-secondary">{proj.technologies.join(" • ")}</small>
-                <a href={proj.playStoreUrl} target="_blank" rel="noreferrer">Open Play Store</a>
+                <a href={proj.playStoreUrl} target="_blank" rel="noreferrer"><FaGooglePlay /> Open Play Store</a>
               </article>
             </div>
           ))}
@@ -333,7 +388,7 @@ export default function App() {
 
         <div className="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
           <h3 className="h5 mb-0">GitHub Repositories (Auto-updated)</h3>
-          <a href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer">View all on GitHub</a>
+          <a href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer"><FaGithub /> View all on GitHub</a>
         </div>
 
         {githubLoading && <p className="text-body-secondary">Loading GitHub repositories...</p>}
@@ -346,12 +401,12 @@ export default function App() {
                 <article className="github-card h-100">
                   <div className="d-flex align-items-center justify-content-between mb-2 gap-2">
                     <h4 className="h6 mb-0 text-truncate">{repo.title}</h4>
-                    {repo.isAndroid && <span className="badge text-bg-success">Android</span>}
+                    {repo.isAndroid && <span className="badge text-bg-success"><FaAndroid /> Android</span>}
                   </div>
                   <p className="small mb-3">{repo.description}</p>
-                  <small className="d-block text-body-secondary mb-2">{repo.language} • {repo.stars} stars</small>
+                  <small className="d-block text-body-secondary mb-2">{repo.language} • <FaRegStar /> {repo.stars}</small>
                   <small className="d-block text-body-secondary mb-3">Updated {repo.updated}</small>
-                  <a href={repo.repoUrl} target="_blank" rel="noreferrer">Open Repository</a>
+                  <a href={repo.repoUrl} target="_blank" rel="noreferrer"><FaGithub /> Open Repository</a>
                 </article>
               </div>
             ))}
@@ -366,12 +421,12 @@ export default function App() {
               <h3 className="mb-1">Available for Android freelance and full-time opportunities</h3>
               <p className="mb-0">Let us discuss product goals, architecture, and release timelines.</p>
             </div>
-            <a className="btn btn-accent" href="#contact">Start Conversation</a>
+            <a className="btn btn-accent" href="#contact"><FaArrowRight /> Start Conversation</a>
           </div>
         </div>
       </section>
 
-      <Section id="contact" title="Contact" subtitle="Send a direct message and it opens your mail client with pre-filled details.">
+      <Section id="contact" title="Contact" icon={<FaEnvelope />} subtitle="Send a direct message and it opens your mail client with pre-filled details.">
         <form className="row g-3" onSubmit={handleContactSubmit}>
           <div className="col-md-6">
             <label className="form-label">Name</label>
@@ -386,9 +441,9 @@ export default function App() {
             <textarea className="form-control form-control-lg" rows="5" name="message" required />
           </div>
           <div className="col-12 d-flex flex-wrap align-items-center gap-3">
-            <button className="btn btn-accent btn-lg" type="submit">Send Message</button>
-            <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer">GitHub</a>
+            <button className="btn btn-accent btn-lg" type="submit"><FaEnvelope /> Send Message</button>
+            <a href={profile.linkedin} target="_blank" rel="noreferrer"><FaLinkedin /> LinkedIn</a>
+            <a href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer"><FaGithub /> GitHub</a>
           </div>
         </form>
       </Section>
