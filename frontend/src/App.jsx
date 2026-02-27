@@ -375,9 +375,9 @@ export default function App() {
                 <a className="btn btn-lg btn-ghost icon-only-cta" href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer" aria-label="GitHub profile" title="GitHub profile"><FaGithub /></a>
               </div>
               <div className="stat-row">
-                <div className="stat-card"><span>4 Years</span><small>Mobile App Engineering</small></div>
-                <div className="stat-card"><span>40+</span><small>Critical Bugs Resolved</small></div>
-                <div className="stat-card"><span>30%</span><small>Crash-rate Reduction</small></div>
+                <div className="stat-card"><span>4+ Years</span><small>Android & Flutter Engineering</small></div>
+                <div className="stat-card"><span>Enterprise Apps</span><small>Built for EdTech, Hospitality, and Telecom</small></div>
+                <div className="stat-card"><span>Release Ownership</span><small>Production Stability, Hotfixes, and Play Store Delivery</small></div>
               </div>
             </div>
             <div className="col-lg-6">
