@@ -31,14 +31,14 @@ const GITHUB_USERNAME = import.meta.env.VITE_GITHUB_USERNAME || "Dinakaran-k";
 const profile = {
   name: "Dinakaran Kommunuri",
   headline: "Freelancer | Open to New Opportunities",
-  role: "Android & Flutter Mobile Developer",
+  role: "Android Engineer | Kotlin & Flutter",
   location: "Andhra Pradesh, India",
   email: "dinakarankommunuri@gmail.com",
   phone: "+91 8096475183",
   linkedin: "https://www.linkedin.com/in/dinakarankommunuri/",
   githubUsername: GITHUB_USERNAME,
   heroIntro:
-    "Shipping stable Android and Flutter apps for enterprise clients with strong ownership across architecture, performance, and production releases.",
+    "Android Engineer with 4 years of hands-on experience delivering production-grade apps using Kotlin and Flutter, with strong ownership in Jetpack Compose, MVVM, Clean Architecture, and release stability.",
   summary:
     "Android Engineer with 4 years of hands-on experience building and maintaining production-grade mobile applications using Kotlin and Flutter. Strong expertise in native Android development with a growing focus on cross-platform solutions using Flutter and Dart. Proven track record in performance optimization, application stability, and scalable architecture using Jetpack Compose, MVVM, and Clean Architecture. Experienced in delivering enterprise-scale applications, resolving production issues, supporting releases, and collaborating closely with cross-functional teams throughout the software development lifecycle in Agile environments.",
   education: {
@@ -388,10 +388,10 @@ export default function App() {
                 </div>
                 <div className="orbit-ring ring-one" />
                 <div className="orbit-ring ring-two" />
-                <div className="orbit-node n1"><FaAndroid /> Native Android</div>
-                <div className="orbit-node n2"><FaBolt /> Flutter</div>
-                <div className="orbit-node n3"><FaTerminal /> KMP</div>
-                <div className="orbit-node n4"><FaFire /> Flutter CMP</div>
+                <div className="orbit-node n1"><FaAndroid /> Kotlin</div>
+                <div className="orbit-node n2"><FaBolt /> Jetpack Compose</div>
+                <div className="orbit-node n3"><FaTerminal /> MVVM</div>
+                <div className="orbit-node n4"><FaFire /> Clean Architecture</div>
               </div>
             </div>
           </div>
@@ -415,7 +415,7 @@ export default function App() {
             <div className="glass-card h-100 about-hero-panel">
               <div className="d-flex flex-wrap gap-2 mb-3">
                 <span className="mini-badge">Open to Client Engagements</span>
-                <span className="mini-badge">Android + Flutter Delivery</span>
+                <span className="mini-badge">Android + Flutter Engineering</span>
                 <span className="mini-badge">Release Ownership</span>
               </div>
 
@@ -576,7 +576,7 @@ export default function App() {
         <div className="container">
           <div className="cta-band">
             <div>
-              <h3 className="mb-1">Available for Android freelance and full-time opportunities</h3>
+              <h3 className="mb-1">Available for Android & Flutter freelance and full-time opportunities</h3>
               <p className="mb-0 section-minor">Let us discuss product goals, architecture, and release timelines.</p>
             </div>
             <a className="btn btn-accent icon-only-cta" href="#contact" aria-label="Start conversation" title="Start conversation"><FaArrowRight /></a>
@@ -607,7 +607,7 @@ export default function App() {
 
       <footer className="py-4 text-center section-minor">
         <div className="container small">
-          <p className="mb-1">{profile.name} | Android & Flutter Developer</p>
+          <p className="mb-1">{profile.name} | Android & Flutter Engineer</p>
           <p className="mb-0">Freelancer | Open to New Opportunities</p>
         </div>
       </footer>
