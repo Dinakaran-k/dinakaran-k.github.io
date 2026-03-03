@@ -219,6 +219,7 @@ export default function App() {
   const [contactStatus, setContactStatus] = useState("");
   const [contactError, setContactError] = useState("");
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [isMobileResumeView, setIsMobileResumeView] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-bs-theme", darkMode ? "dark" : "light");
@@ -346,6 +347,14 @@ export default function App() {
     };
   }, [resumeOpen]);
 
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const apply = () => setIsMobileResumeView(media.matches);
+    apply();
+    media.addEventListener("change", apply);
+    return () => media.removeEventListener("change", apply);
+  }, []);
+
   const groupedSkills = useMemo(() => Object.entries(skills), []);
 
   async function handleContactSubmit(event) {
@@ -392,6 +401,10 @@ export default function App() {
   }
 
   const resumeUrl = `${import.meta.env.BASE_URL}resume.pdf`;
+  const resumeAbsoluteUrl = useMemo(() => new URL(resumeUrl, window.location.href).href, [resumeUrl]);
+  const resumePreviewUrl = isMobileResumeView
+    ? `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(resumeAbsoluteUrl)}`
+    : `${resumeUrl}#view=fitH`;
 
   return (
     <div className="portfolio-root">
@@ -679,8 +692,16 @@ export default function App() {
               </div>
             </div>
             <div className="resume-frame-wrap">
-              <iframe className="resume-iframe" src={`${resumeUrl}#view=fitH`} title="Resume Preview" />
+              <iframe className="resume-iframe" src={resumePreviewUrl} title="Resume Preview" />
             </div>
+            {isMobileResumeView && (
+              <div className="resume-mobile-hint">
+                <span className="section-minor">If preview is blocked by your browser, open resume directly.</span>
+                <a href={resumeUrl} target="_blank" rel="noreferrer" className="icon-only-link" aria-label="Open resume in new tab" title="Open resume">
+                  <FaArrowUpRightFromSquare />
+                </a>
+              </div>
+            )}
           </div>
         </div>
       )}

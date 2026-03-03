@@ -800,6 +800,15 @@ a:hover { text-decoration: underline; }
   background: #fff;
 }
 
+.resume-mobile-hint {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-top: 1px solid var(--line);
+  padding: 0.6rem 0.75rem;
+}
+
 .project-card:hover,
 .github-card:hover {
   transform: translateY(-6px);
@@ -915,6 +924,7 @@ a:hover { text-decoration: underline; }
   }
   .resume-modal-header { padding: 0.72rem 0.75rem; }
   .resume-iframe { height: 76vh; }
+  .resume-mobile-hint { display: flex; }
   .cta-band { flex-direction: column; align-items: flex-start; }
   .orbit-panel { min-height: 230px; }
   .orbit-core { width: 90px; height: 90px; }
