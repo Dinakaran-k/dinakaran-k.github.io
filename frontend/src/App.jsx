@@ -30,7 +30,7 @@ const GITHUB_USERNAME = import.meta.env.VITE_GITHUB_USERNAME || "Dinakaran-k";
 
 const profile = {
   name: "Dinakaran Kommunuri",
-  headline: "Freelancer | Open to New Opportunities",
+  headline: "Android Engineer | 4 Years Experience",
   role: "Android Engineer | Kotlin & Flutter",
   location: "Andhra Pradesh, India",
   email: "dinakarankommunuri@gmail.com",
@@ -576,7 +576,7 @@ export default function App() {
         <div className="container">
           <div className="cta-band">
             <div>
-              <h3 className="mb-1">Available for Android & Flutter freelance and full-time opportunities</h3>
+              <h3 className="mb-1">Available for Android & Flutter opportunities</h3>
               <p className="mb-0 section-minor">Let us discuss product goals, architecture, and release timelines.</p>
             </div>
             <a className="btn btn-accent icon-only-cta" href="#contact" aria-label="Start conversation" title="Start conversation"><FaArrowRight /></a>
@@ -608,7 +608,7 @@ export default function App() {
       <footer className="py-4 text-center section-minor">
         <div className="container small">
           <p className="mb-1">{profile.name} | Android & Flutter Engineer</p>
-          <p className="mb-0">Freelancer | Open to New Opportunities</p>
+          <p className="mb-0">Kotlin • Jetpack Compose • MVVM • Clean Architecture</p>
         </div>
       </footer>
     </div>
