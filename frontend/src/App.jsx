@@ -27,6 +27,7 @@ import {
 
 const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
 const GITHUB_USERNAME = import.meta.env.VITE_GITHUB_USERNAME || "Dinakaran-k";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "");
 
 const profile = {
   name: "Dinakaran Kommunuri",
@@ -211,6 +212,9 @@ export default function App() {
   const [githubProjects, setGithubProjects] = useState([]);
   const [githubError, setGithubError] = useState("");
   const [githubLoading, setGithubLoading] = useState(true);
+  const [contactSending, setContactSending] = useState(false);
+  const [contactStatus, setContactStatus] = useState("");
+  const [contactError, setContactError] = useState("");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-bs-theme", darkMode ? "dark" : "light");
@@ -324,16 +328,47 @@ export default function App() {
 
   const groupedSkills = useMemo(() => Object.entries(skills), []);
 
-  function handleContactSubmit(event) {
+  async function handleContactSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const message = String(formData.get("message") || "").trim();
 
-    const subject = encodeURIComponent(`Portfolio contact from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+    setContactStatus("");
+    setContactError("");
+    setContactSending(true);
+
+    try {
+      if (API_BASE_URL) {
+        const response = await fetch(`${API_BASE_URL}/api/contact`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, message })
+        });
+
+        if (!response.ok) {
+          const data = await response.json().catch(() => ({}));
+          throw new Error(data.message || `Contact API failed (${response.status})`);
+        }
+
+        event.currentTarget.reset();
+        setContactStatus("Message sent. I will get back to you soon.");
+        return;
+      }
+
+      const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+      window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+      setContactStatus("Email draft opened in your mail app.");
+    } catch (error) {
+      const fallbackSubject = encodeURIComponent(`Portfolio contact from ${name}`);
+      const fallbackBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+      window.location.href = `mailto:${profile.email}?subject=${fallbackSubject}&body=${fallbackBody}`;
+      setContactError(error.message || "Could not send directly. Opened mail app as fallback.");
+    } finally {
+      setContactSending(false);
+    }
   }
 
   const resumeUrl = `${import.meta.env.BASE_URL}resume.pdf`;
@@ -584,7 +619,7 @@ export default function App() {
         </div>
       </section>
 
-      <Section id="contact" title="Contact" icon={<FaEnvelope />} subtitle="Send a direct message and it opens your mail client with pre-filled details.">
+      <Section id="contact" title="Contact" icon={<FaEnvelope />} subtitle="Send a direct message. It uses backend email delivery when configured, with mail app fallback.">
         <form className="row g-3" onSubmit={handleContactSubmit}>
           <div className="col-md-6">
             <label className="form-label">Name</label>
@@ -599,9 +634,13 @@ export default function App() {
             <textarea className="form-control form-control-lg" rows="5" name="message" required />
           </div>
           <div className="col-12 d-flex flex-wrap align-items-center gap-3">
-            <button className="btn btn-accent btn-lg" type="submit"><FaEnvelope /> Send Message</button>
+            <button className="btn btn-accent btn-lg" type="submit" disabled={contactSending}>
+              <FaEnvelope /> {contactSending ? "Sending..." : "Send Message"}
+            </button>
             <a className="icon-only-link" href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="Open LinkedIn profile" title="LinkedIn"><FaLinkedin /></a>
           </div>
+          {contactStatus && <div className="col-12"><p className="mb-0 text-success">{contactStatus}</p></div>}
+          {contactError && <div className="col-12"><p className="mb-0 text-warning">{contactError}</p></div>}
         </form>
       </Section>
 
