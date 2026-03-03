@@ -741,6 +741,25 @@ a:hover { text-decoration: underline; }
   pointer-events: none;
 }
 
+.resume-preview-card {
+  padding: 1.1rem;
+}
+
+.resume-frame-wrap {
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: color-mix(in oklab, var(--bg-soft) 90%, var(--brand-2) 10%);
+}
+
+.resume-iframe {
+  width: 100%;
+  height: min(78vh, 920px);
+  border: 0;
+  display: block;
+  background: #fff;
+}
+
 .project-card:hover,
 .github-card:hover {
   transform: translateY(-6px);
@@ -849,6 +868,7 @@ a:hover { text-decoration: underline; }
   .stat-row { grid-template-columns: 1fr; }
   .ticker-item { padding: 0.58rem 0.78rem; font-size: 0.76rem; }
   .repo-desc { min-height: 0; }
+  .resume-iframe { height: 70vh; }
   .cta-band { flex-direction: column; align-items: flex-start; }
   .orbit-panel { min-height: 230px; }
   .orbit-core { width: 90px; height: 90px; }

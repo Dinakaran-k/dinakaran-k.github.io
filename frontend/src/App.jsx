@@ -7,6 +7,8 @@ import {
   FaBolt,
   FaBriefcase,
   FaCodeBranch,
+  FaDownload,
+  FaEye,
   FaEnvelope,
   FaFire,
   FaGithub,
@@ -406,7 +408,7 @@ export default function App() {
               <p className="hero-copy mb-4">{profile.heroIntro}</p>
               <div className="d-flex flex-wrap gap-3 mb-4">
                 <a className="btn btn-lg btn-accent icon-only-cta" href="#contact" aria-label="Open to work" title="Open to work"><FaWandMagicSparkles /></a>
-                <a className="btn btn-lg btn-ghost icon-only-cta" href={resumeUrl} download aria-label="Download resume" title="Download resume"><FaBookOpen /></a>
+                <a className="btn btn-lg btn-ghost icon-only-cta" href="#resume" aria-label="Preview resume" title="Preview resume"><FaEye /></a>
                 <a className="btn btn-lg btn-ghost icon-only-cta" href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer" aria-label="GitHub profile" title="GitHub profile"><FaGithub /></a>
               </div>
               <div className="stat-row">
@@ -550,6 +552,24 @@ export default function App() {
               </div>
             </div>
           ))}
+        </div>
+      </Section>
+
+      <Section id="resume" title="Resume Preview" icon={<FaBookOpen />} subtitle="Quick preview on-page before downloading.">
+        <div className="glass-card resume-preview-card">
+          <div className="d-flex align-items-center justify-content-between mb-3 gap-2">
+            <p className="mb-0 section-minor">Responsive in-page resume viewer</p>
+            <a className="icon-only-link" href={resumeUrl} download aria-label="Download resume PDF" title="Download resume">
+              <FaDownload />
+            </a>
+          </div>
+          <div className="resume-frame-wrap">
+            <iframe
+              className="resume-iframe"
+              src={`${resumeUrl}#view=fitH`}
+              title="Resume Preview"
+            />
+          </div>
         </div>
       </Section>
 
