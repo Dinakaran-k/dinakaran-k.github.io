@@ -24,6 +24,7 @@ import {
   FaSun,
   FaTerminal,
   FaUserTie,
+  FaXmark,
   FaWandMagicSparkles
 } from "react-icons/fa6";
 
@@ -217,6 +218,7 @@ export default function App() {
   const [contactSending, setContactSending] = useState(false);
   const [contactStatus, setContactStatus] = useState("");
   const [contactError, setContactError] = useState("");
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-bs-theme", darkMode ? "dark" : "light");
@@ -328,6 +330,22 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!resumeOpen) return undefined;
+
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setResumeOpen(false);
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [resumeOpen]);
+
   const groupedSkills = useMemo(() => Object.entries(skills), []);
 
   async function handleContactSubmit(event) {
@@ -408,7 +426,7 @@ export default function App() {
               <p className="hero-copy mb-4">{profile.heroIntro}</p>
               <div className="d-flex flex-wrap gap-3 mb-4">
                 <a className="btn btn-lg btn-accent icon-only-cta" href="#contact" aria-label="Open to work" title="Open to work"><FaWandMagicSparkles /></a>
-                <a className="btn btn-lg btn-ghost icon-only-cta" href="#resume" aria-label="Preview resume" title="Preview resume"><FaEye /></a>
+                <button className="btn btn-lg btn-ghost icon-only-cta" type="button" onClick={() => setResumeOpen(true)} aria-label="Preview resume" title="Preview resume"><FaEye /></button>
                 <a className="btn btn-lg btn-ghost icon-only-cta" href={`https://github.com/${profile.githubUsername}`} target="_blank" rel="noreferrer" aria-label="GitHub profile" title="GitHub profile"><FaGithub /></a>
               </div>
               <div className="stat-row">
@@ -555,24 +573,6 @@ export default function App() {
         </div>
       </Section>
 
-      <Section id="resume" title="Resume Preview" icon={<FaBookOpen />} subtitle="Quick preview on-page before downloading.">
-        <div className="glass-card resume-preview-card">
-          <div className="d-flex align-items-center justify-content-between mb-3 gap-2">
-            <p className="mb-0 section-minor">Responsive in-page resume viewer</p>
-            <a className="icon-only-link" href={resumeUrl} download aria-label="Download resume PDF" title="Download resume">
-              <FaDownload />
-            </a>
-          </div>
-          <div className="resume-frame-wrap">
-            <iframe
-              className="resume-iframe"
-              src={`${resumeUrl}#view=fitH`}
-              title="Resume Preview"
-            />
-          </div>
-        </div>
-      </Section>
-
       <Section id="projects" title="Projects" icon={<FaCodeBranch />} subtitle="Client projects from resume plus live GitHub repositories.">
         <h3 className="h5 mb-3">Client Projects</h3>
         <div className="row g-3 mb-5">
@@ -663,6 +663,27 @@ export default function App() {
           {contactError && <div className="col-12"><p className="mb-0 text-warning">{contactError}</p></div>}
         </form>
       </Section>
+
+      {resumeOpen && (
+        <div className="resume-modal-overlay" role="presentation" onClick={() => setResumeOpen(false)}>
+          <div className="resume-modal-shell" role="dialog" aria-modal="true" aria-label="Resume preview dialog" onClick={(event) => event.stopPropagation()}>
+            <div className="resume-modal-header">
+              <h3 className="mb-0 h6">Resume Preview</h3>
+              <div className="d-flex align-items-center gap-2">
+                <a className="icon-only-link" href={resumeUrl} download aria-label="Download resume PDF" title="Download resume">
+                  <FaDownload />
+                </a>
+                <button className="icon-only-link" type="button" onClick={() => setResumeOpen(false)} aria-label="Close resume preview" title="Close">
+                  <FaXmark />
+                </button>
+              </div>
+            </div>
+            <div className="resume-frame-wrap">
+              <iframe className="resume-iframe" src={`${resumeUrl}#view=fitH`} title="Resume Preview" />
+            </div>
+          </div>
+        </div>
+      )}
 
       <footer className="py-4 text-center section-minor">
         <div className="container small">
